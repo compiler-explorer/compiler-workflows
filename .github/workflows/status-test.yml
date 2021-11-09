@@ -33,6 +33,8 @@ jobs:
             "path": "s3://something/tar.xz"
           }
           EOF
+          cat entry.json
+          jq -C . entry.json
       - name: DynamoDB Actions
         uses: mooyoul/dynamodb-actions@v1.2.1
         env:
