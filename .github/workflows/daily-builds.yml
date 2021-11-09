@@ -50,7 +50,7 @@ jobs:
             #- { image: clang, build_name: llvm_spirv, command: build.sh, build: llvm-spirv }
 
     name: Daily build of ${{ matrix.build_name }}
-    runs-on: [ 'ce', 'ubuntu' ]
+    runs-on: [ 'self-hosted', 'ce', 'ubuntu' ]
 
     steps:
       - name: Start from a clean directory

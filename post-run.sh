@@ -6,7 +6,8 @@ COMPILER="$1"
 STATUS="$2"
 OUTPUT_PATH="$3"
 START_TIME="$4"
-AWS=${AWS:-aws}
+AWS="${AWS:-aws}"
+GITHUB_RUN_ID="${GITHUB_RUN_ID:-unknown}"
 
 BUILD_DURATION=$(( $(date +%s) - START_TIME ))
 BUILD_COMPLETE_TIME=$(date -u -Iseconds)
@@ -16,15 +17,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo Build complete, environment is:
-env | grep -v AWS_
-
 cat <<EOF > "${TEMP_ENTRY_FILE}"
 {
   "compiler": {"S": "${COMPILER}"},
   "timestamp": {"S": "${BUILD_COMPLETE_TIME}"},
   "duration": {"N": "${BUILD_DURATION}"},
   "status": {"S": "${STATUS}"},
+  "github_run_id": {"S": "${GITHUB_RUN_ID}"},
   "path": {"S": "${OUTPUT_PATH}"}
 }
 EOF
