@@ -16,7 +16,7 @@ jobs:
       - name: printy
         run: echo "My run id is '${GITHUB_RUN_ID}'"
       - name: post
-        if: ${{ always() }}
+        if: always()
         run: ./post-run.sh test-gcc SUCCESS s3://something/tar.xz ${{ steps.pre.outputs.start }}
         env:
           AWS_DEFAULT_REGION: us-east-1
