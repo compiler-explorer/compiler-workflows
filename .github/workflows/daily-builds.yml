@@ -103,7 +103,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Update build logs
         if: always()
-        run: ./post-run.sh ${{ matrix.build_name }} ${{ steps.build.outputs.status != 'SKIPPED' }} ${{ steps.filenames.outputs.s3dest }} ${{ steps.previous.outputs.start }}
+        run: ./post-run.sh ${{ matrix.build_name }} ${{ steps.build.outputs.status }} ${{ steps.filenames.outputs.s3dest }} ${{ steps.previous.outputs.start }}
         env:
           AWS_DEFAULT_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
