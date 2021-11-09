@@ -2,6 +2,12 @@
 
 set -exuo pipefail
 
+COMPILER="$1"
+STATUS="$2"
+OUTPUT_PATH="$3"
+START_TIME="$4"
+
+BUILD_DURATION=$(( $(date +s) - START_TIME ))
 BUILD_COMPLETE_TIME=$(date -u -Iseconds)
 
 echo Build complete, environment is:
@@ -9,11 +15,11 @@ env | grep -v AWS_
 
 cat <<EOF > entry.json
 {
-  "compiler": {"S": "test-gcc"},
-  "timestamp": {"S": "$(date -u -Iseconds)"},
-  "duration": {"N": "123"},
-  "status": {"S": "SUCCESS"},
-  "path": {"S": "s3://something/tar.xz"}
+  "compiler": {"S": "${COMPILER}"},
+  "timestamp": {"S": "${BUILD_COMPLETE_TIME}"},
+  "duration": {"N": "${BUILD_DURATION}"},
+  "status": {"S": "${STATUS}"},
+  "path": {"S": "${OUTPUT_PATH}"}
 }
 EOF
 jq -C . entry.json

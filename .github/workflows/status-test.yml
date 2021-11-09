@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: pre
+        id: pre
         run: ./pre-run.sh
       - name: printy
         run: echo "My run id is '${GITHUB_RUN_ID}'"
@@ -26,7 +27,8 @@ jobs:
 #      - name: Echo check run ids
 #        run: echo "job ids - ${{ toJSON(fromJSON(steps.fetch.outputs.data).jobs.*.id) }}"
       - name: post
-        run: ./post-run.sh
+        if: ${{ always() }}
+        run: ./post-run.sh test-gcc SUCCESS s3://something/tar.xz ${{ pre.outputs.start }}
         env:
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
