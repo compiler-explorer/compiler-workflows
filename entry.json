@@ -1,0 +1,7 @@
+{
+  "compiler": {"S": "test-gcc"},
+  "timestamp": {"S": "2021-11-09T00:53:52+00:00"},
+  "duration": {"N": "123"},
+  "status": {"S": "SUCCESS"},
+  "path": {"S": "s3://something/tar.xz"}
+}

@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+      - name: pre
+        run: pre-run.sh
       - name: printy
         run: echo "My run id is '${GITHUB_RUN_ID}'"
 #      - name: Fetch check run ids
@@ -22,27 +25,34 @@ jobs:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: Echo check run ids
 #        run: echo "job ids - ${{ toJSON(fromJSON(steps.fetch.outputs.data).jobs.*.id) }}"
-      - name: Make json
-        run: |
-          echo <<EOF > entry.json
-          {
-            "compiler": "test-gcc",
-            "timestamp": "$(date -u -Iseconds)",
-            "duration": 123,
-            "status": "SUCCESS",
-            "path": "s3://something/tar.xz"
-          }
-          EOF
-          cat entry.json
-          jq -C . entry.json
-      - name: DynamoDB Actions
-        uses: mooyoul/dynamodb-actions@v1.2.1
+      - name: post
+        run: post-run.sh
         env:
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        with:
-          operation: put
-          region: us-east-1
-          table: compiler-builds
-          file: entry.json
+      # - name: Make json
+      #   run: |
+      #     echo <<EOF > entry.json
+      #     {
+      #       "compiler": "test-gcc",
+      #       "timestamp": "$(date -u -Iseconds)",
+      #       "duration": 123,
+      #       "status": "SUCCESS",
+      #       "path": "s3://something/tar.xz"
+      #     }
+      #     EOF
+      #     cat entry.json
+      #     jq -C . entry.json
+      # - name: Upload json
+      # - name: DynamoDB Actions
+      #   uses: mooyoul/dynamodb-actions@v1.2.1
+      #   env:
+      #     AWS_REGION: us-east-1
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   with:
+      #     operation: put
+      #     region: us-east-1
+      #     table: compiler-builds
+      #     file: entry.json
