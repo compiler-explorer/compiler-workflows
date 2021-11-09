@@ -1,0 +1,12 @@
+/docker-squash
+*.pyc
+*.pem
+*.swp
+*.xz
+config.json
+.env
+/.deploy
+.nfs*
+node_modules
+/.mypy_cache
+/.dist
