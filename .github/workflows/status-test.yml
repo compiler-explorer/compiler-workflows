@@ -24,7 +24,7 @@ jobs:
 #        run: echo "job ids - ${{ toJSON(fromJSON(steps.fetch.outputs.data).jobs.*.id) }}"
       - name: Make json
         run: |
-          echo <<EOF
+          echo <<EOF > entry.json
           {
             "compiler": "test-gcc",
             "timestamp": "$(date -u -Iseconds)",
@@ -32,7 +32,7 @@ jobs:
             "status": "SUCCESS",
             "path": "s3://something/tar.xz"
           }
-          EOF > entry.json
+          EOF
       - name: DynamoDB Actions
         uses: mooyoul/dynamodb-actions@v1.2.1
         env:
