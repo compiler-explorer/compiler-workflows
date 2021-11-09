@@ -55,10 +55,12 @@ jobs:
     steps:
       - name: Start from a clean directory
         uses: AutoModality/action-clean@v1.1.0
-      - name: Get previous build version number
+      - uses: actions/checkout@v2
+      - name: Get previous build version number, and start the run
         id: previous
         run: |
           echo ::set-output name=revision::$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ matrix.build_name }} || true)
+          ./pre-run.sh
       - name: Daily build of ${{ matrix.build_name }}
         id: build
         run: |
@@ -99,3 +101,10 @@ jobs:
           dest: s3://compiler-explorer/opt/.buildrevs/${{ matrix.build_name }}
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Update build logs
+        if: always()
+        run: ./post-run.sh ${{ matrix.build_name }} ${{ steps.build.outputs.status != 'SKIPPED' }} ${{ steps.filenames.outputs.s3dest }} ${{ steps.previous.outputs.start }}
+        env:
+          AWS_DEFAULT_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
