@@ -2,8 +2,8 @@
 name: Daily build of gcc_gccrs_master via gcc gccrs-master
 
 on:
-  # schedule:
-  #   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:

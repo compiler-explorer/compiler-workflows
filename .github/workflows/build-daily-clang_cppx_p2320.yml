@@ -2,8 +2,8 @@
 name: Daily build of clang_cppx_p2320 via clang cppx-p2320-trunk
 
 on:
-  # schedule:
-  #   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:

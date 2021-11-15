@@ -2,8 +2,8 @@
 name: Daily build of clang_assertions via clang assertions-trunk
 
 on:
-  # schedule:
-  #   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:

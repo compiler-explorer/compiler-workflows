@@ -14,8 +14,8 @@ def make_yaml_doc(
 name: {friendly_name}
 
 on:
-  # schedule:
-  #   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
