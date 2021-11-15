@@ -1,4 +1,4 @@
-name: Daily build of gcc via gcc trunk
+name: Daily build of SPIRV-Tools via misc master
 
 on:
   # schedule:
@@ -15,9 +15,9 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with: 
-          image: gcc
-          build_name: gcc
-          command: build.sh
-          build: trunk
+          image: misc
+          build_name: SPIRV-Tools
+          command: build-spirv-tools.sh
+          build: master
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

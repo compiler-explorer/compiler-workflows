@@ -1,24 +1,23 @@
 name: Daily build action
+description: "Builds a 'daily build' of Compiler Explorer's compilers"
 inputs:
   image:
     description: "Docker image to build with"
     required: true
-    type: string
   build_name:
     description: "Build name to de-duplicate unchanged code runs against"
     required: true
-    type: string
   command:
     description: "Command to run"
     required: true
-    type: string
   build:
     description: "Argument to command"
     required: true
-    type: string
   AWS_ACCESS_KEY_ID:
+    description: "Access key"
     required: true
   AWS_SECRET_ACCESS_KEY:
+    description: "Secret key"
     required: true
 
 runs:
@@ -28,11 +27,13 @@ runs:
       uses: AutoModality/action-clean@v1.1.0
     - uses: actions/checkout@v2
     - name: Get previous build version number, and start the run
+      shell: bash
       id: previous
       run: |
         echo ::set-output name=revision::$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.build_name }} || true)
         ./pre-run.sh
     - name: Daily build of ${{ inputs.build_name }}
+      shell: bash
       id: build
       run: |
         mkdir dist
@@ -45,6 +46,7 @@ runs:
         gawk -e 'match($0, /^ce-build-(\w+):(.*)/, m) { print "::set-output name=" m[1] "::" m[2]; }' output.log
         echo ::endgroup::
     - name: Get output filename
+      shell: bash
       if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       id: filenames
       run: |
@@ -68,6 +70,7 @@ runs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Update build logs
+      shell: bash
       if: always()
       run: ./post-run.sh "${{ inputs.build_name }}" "${{ steps.build.outputs.status }}" "${{ steps.filenames.outputs.s3dest }}" "${{ steps.previous.outputs.start }}"
       env:

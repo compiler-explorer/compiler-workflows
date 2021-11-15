@@ -1,4 +1,4 @@
-name: Daily build of gcc via gcc trunk
+name: Daily build of go via go trunk
 
 on:
   # schedule:
@@ -15,8 +15,8 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with: 
-          image: gcc
-          build_name: gcc
+          image: go
+          build_name: go
           command: build.sh
           build: trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
