@@ -17,3 +17,6 @@ test:
 	env AWS=echo ./pre-run.sh
 	env AWS=echo ./post-run.sh COMPILER STATUS OUTPUT_PATH 0
 
+.PHONY: build-yamls
+build-yamls: $(PYTHON)
+	$(POETRY) run python make_builds.py
