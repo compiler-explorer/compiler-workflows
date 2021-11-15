@@ -10,6 +10,6 @@ jobs:
     runs-on: [ 'self-hosted', 'ce', 'ubuntu' ]
     steps:
       - name: All the steps
-        uses: ./.github/actions/daily-build
+        uses: "./.github/actions/daily-build"
         with: { image: clang, build_name: llvm, command: build.sh, build: llvm-trunk, AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}, AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} }
       
