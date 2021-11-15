@@ -15,8 +15,8 @@ $(SYS_PYTHON):
 deps: $(POETRY) $(POETRY_DEPS)
 $(POETRY): $(SYS_PYTHON)
 	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | $(SYS_PYTHON) - --no-modify-path
-$(POETRY_DEPS): $(POETRY)
-	$(POETRY) install
+$(POETRY_DEPS): $(POETRY) pyproject.toml poetry.lock
+	$(POETRY) install --remove-untracked
 	@touch $@
 
 .PHONY: pre-commit
