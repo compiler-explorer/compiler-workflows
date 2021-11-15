@@ -9,7 +9,10 @@ jobs:
   daily-build:
     runs-on: [ 'self-hosted', 'ce', 'ubuntu' ]
     steps:
-      - name: All the steps
-        uses: "./.github/actions/daily-build"
+      - name: Start from a clean directory
+        uses: AutoModality/action-clean@v1.1.0
+      - uses: actions/checkout@v2
+      - name: Run the build
+        uses: ./.github/actions/daily-build
         with: { image: clang, build_name: llvm, command: build.sh, build: llvm-trunk, AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}, AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} }
       
