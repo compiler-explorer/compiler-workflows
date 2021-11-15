@@ -12,11 +12,19 @@ poetry: $(POETRY)
 $(POETRY): $(SYS_PYTHON)
 	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | $(SYS_PYTHON) - --no-modify-path
 
+.PHONY: pre-commit
+pre-commit: $(POETRY)
+	$(POETRY) run pre-commit run --all-files
+
+.PHONY: install-pre-commit
+install-pre-commit: $(POETRY)
+	$(POETRY) run pre-commit install
+
 .PHONY: test
-test:
+test: $(PYTHON)
 	env AWS=echo ./pre-run.sh
 	env AWS=echo ./post-run.sh COMPILER STATUS OUTPUT_PATH 0
 
 .PHONY: build-yamls
-build-yamls: $(PYTHON)
+build-yamls: $(POETRY)
 	$(POETRY) run python make_builds.py

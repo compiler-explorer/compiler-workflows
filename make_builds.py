@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run the build
         uses: ./.github/actions/daily-build
-        with: 
+        with:
           image: {image}
           build_name: {build_name}
           command: {command}

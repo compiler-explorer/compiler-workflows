@@ -12,6 +12,11 @@ repos:
         - id: shellcheck
     - repo: local
       hooks:
+        - id: builds-up-to-date
+          name: Ensure build yamls are up-to-date
+          entry: make build-yamls
+          language: system
+          types_or: [python, yaml]
         - id: test
           name: Run tests
           entry: make test

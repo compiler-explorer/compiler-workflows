@@ -1,0 +1,15 @@
+name: CI of the scripts themselves
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  daily-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: pre-commit hooks
+        run: env SKIP=test make pre-commit
+      - name: tests
+        run: make test

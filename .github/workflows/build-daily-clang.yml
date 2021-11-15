@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run the build
         uses: ./.github/actions/daily-build
-        with: 
+        with:
           image: clang
           build_name: clang
           command: build.sh
