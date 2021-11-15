@@ -1,0 +1,83 @@
+name: Daily build template
+
+on:
+  workflow_call:
+    inputs:
+      image:
+       description: "Docker image to build with"
+       required: true
+       type: string
+      build_name:
+       description: "Build name to de-duplicate unchanged code runs against"
+       required: true
+       type: string
+      command:
+       description: "Command to run"
+       required: true
+       type: string
+      build:
+       description: "Argument to command"
+       required: true
+       type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+
+jobs:
+  build:
+    name: Daily build of ${{ inputs.build_name }}
+    runs-on: [ 'self-hosted', 'ce', 'ubuntu' ]
+
+    steps:
+      - name: Start from a clean directory
+        uses: AutoModality/action-clean@v1.1.0
+      - uses: actions/checkout@v2
+      - name: Get previous build version number, and start the run
+        id: previous
+        run: |
+          echo ::set-output name=revision::$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.build_name }} || true)
+          ./pre-run.sh
+      - name: Daily build of ${{ inputs.build_name }}
+        id: build
+        run: |
+          mkdir dist
+          echo ::group::Docker build
+          docker run -v$(pwd)/dist:/dist --rm compilerexplorer/${{ inputs.image }}-builder \
+            bash ${{ inputs.command }} ${{ inputs.build }} \
+            /dist "${{ steps.previous.outputs.revision }}" | tee output.log
+          echo ::endgroup::
+          echo ::group::Translate docker output into GH variables
+          gawk -e 'match($0, /^ce-build-(\w+):(.*)/, m) { print "::set-output name=" m[1] "::" m[2]; }' output.log
+          echo ::endgroup::
+      - name: Get output filename
+        if: ${{ steps.build.outputs.status != 'SKIPPED' }}
+        id: filenames
+        run: |
+          echo ::set-output name=source::$(pwd)/dist/$(basename ${{ steps.build.outputs.output }})
+          echo ::set-output name=s3dest::s3://compiler-explorer/opt/$(basename ${{ steps.build.outputs.output }})
+          echo ${{ steps.build.outputs.revision }} > ${{ inputs.build_name }}
+      - name: Copy output to S3
+        if: ${{ steps.build.outputs.status != 'SKIPPED' }}
+        uses: prewk/s3-cp-action@v2
+        with:
+          source: ${{ steps.filenames.outputs.source }}
+          dest: ${{ steps.filenames.outputs.s3dest }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Copy revision to S3
+        if: ${{ steps.build.outputs.status != 'SKIPPED' }}
+        uses: prewk/s3-cp-action@v2
+        with:
+          source: ${{ inputs.build_name }}
+          dest: s3://compiler-explorer/opt/.buildrevs/${{ inputs.build_name }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Update build logs
+        if: always()
+        run: ./post-run.sh "${{ inputs.build_name }}" "${{ steps.build.outputs.status }}" "${{ steps.filenames.outputs.s3dest }}" "${{ steps.previous.outputs.start }}"
+        env:
+          AWS_DEFAULT_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
