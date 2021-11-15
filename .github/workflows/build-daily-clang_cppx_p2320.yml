@@ -1,3 +1,4 @@
+### DO NOT EDIT - created by a script ###
 name: Daily build of clang_cppx_p2320 via clang cppx-p2320-trunk
 
 on:

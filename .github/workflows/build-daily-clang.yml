@@ -1,3 +1,4 @@
+### DO NOT EDIT - created by a script ###
 name: Daily build of clang via clang trunk
 
 on:

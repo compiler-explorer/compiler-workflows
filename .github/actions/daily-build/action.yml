@@ -59,16 +59,16 @@ runs:
       with:
         source: ${{ steps.filenames.outputs.source }}
         dest: ${{ steps.filenames.outputs.s3dest }}
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_access_key_id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
     - name: Copy revision to S3
       if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       uses: prewk/s3-cp-action@v2
       with:
         source: ${{ inputs.build_name }}
         dest: s3://compiler-explorer/opt/.buildrevs/${{ inputs.build_name }}
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_access_key_id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
     - name: Update build logs
       shell: bash
       if: always()
