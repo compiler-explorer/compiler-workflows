@@ -50,7 +50,7 @@ def make_status_badges(friendly_name: str, build_name, build_file: str) -> str:
     success_shield = f"![Last success]({success_shield_url})"
     build_shield_url = make_shield_url("Last build", build_name, "yellow", "$.last_build.timestamp")
     build_shield = f"![Last build]({build_shield_url})"
-    return f"{friendly_name} -- {gh_badge}{success_shield}{build_shield}"
+    return f"{gh_badge}{success_shield}{build_shield}"
 
 @click.command()
 @click.option("--yaml-file", default="compilers.yaml", type=click.File())
