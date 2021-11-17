@@ -6,7 +6,7 @@ import click
 from pathlib import Path
 import yaml
 
-
+import urllib.parse
 def make_yaml_doc(
     friendly_name: str, image: str, build_name: str, command: str, build: str
 ) -> str:
@@ -37,10 +37,20 @@ jobs:
 """
 
 
-def make_status_badge(friendly_name: str, build_file: str) -> str:
-    wf = "https://github.com/compiler-explorer/compiler-workflows/actions/workflows/"
-    return f"""[![{friendly_name}]({wf}/{build_file}/badge.svg)]({wf}/{build_file})"""
+def make_shield_url(friendly_name: str, build_name: str, colour:str, query: str) -> str:
+    status_url= f"https://lambda.compiler-explorer.com/compiler-build/{build_name}"
+    params = dict(color=colour, label=friendly_name, query=query, url=status_url)
+    return f"""https://img.shields.io/badge/dynamic/json?{urllib.parse.urlencode(params)}"""
 
+
+def make_status_badges(friendly_name: str, build_name, build_file: str) -> str:
+    wf = "https://github.com/compiler-explorer/compiler-workflows/actions/workflows/"
+    gh_badge = f"""[![Status]({wf}/{build_file}/badge.svg)]({wf}/{build_file})"""
+    success_shield_url = make_shield_url("Last OK", build_name, "success", "$.last_success.timestamp")
+    success_shield = f"![Last success]({success_shield_url})"
+    build_shield_url = make_shield_url("Last build", build_name, "yellow", "$.last_build.timestamp")
+    build_shield = f"![Last build]({build_shield_url})"
+    return f"{friendly_name} -- {gh_badge}{success_shield}{build_shield}"
 
 @click.command()
 @click.option("--yaml-file", default="compilers.yaml", type=click.File())
@@ -74,7 +84,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
                 build=build,
             )
         )
-        badges[friendly_name] = make_status_badge(friendly_name, build_yml)
+        badges[friendly_name] = make_status_badges(friendly_name, build_name, build_yml)
     status_file.write(f"## Build status\n\n")
     for name in sorted(badges.keys()):
         status_file.write(f"* {badges[name]}\n")
