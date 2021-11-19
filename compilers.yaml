@@ -22,6 +22,7 @@ compilers:
     - { image: clang, build_name: clang_llvmflang, command: build.sh, build: llvmflang-trunk }
     - { image: clang, build_name: clang_patmat, command: build.sh, build: patmat-trunk }
     - { image: clang, build_name: clang_parmexpr, command: build-parmexpr.sh, build: trunk }
+    - { image: clang, build_name: clang_reflection, command: build.sh, build: reflection-trunk }
     - { image: go, build_name: go, command: build.sh, build: trunk }
     - { image: misc, build_name: tinycc, command: build-tinycc.sh, build: trunk }
     - { image: misc, build_name: cc65, command: buildcc65.sh, build: trunk }
