@@ -37,6 +37,7 @@ runs:
       id: build
       run: |
         mkdir dist
+        chmod og+w dist # some builds don't run as root, so let anyone write here
         echo ::group::Docker build
         docker run -v$(pwd)/dist:/dist --rm compilerexplorer/${{ inputs.image }}-builder \
           bash ${{ inputs.command }} ${{ inputs.build }} \
