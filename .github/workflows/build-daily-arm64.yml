@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of arm64 via gcc-cross-builder arm64 trunk
+name: Daily build of arm64 via gcc-cross arm64 trunk
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
-          image: gcc-cross-builder
+          image: gcc-cross
           build_name: arm64
           command: build.sh
           build: arm64 trunk
