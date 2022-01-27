@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of dang via clang dang
+name: Daily build of dang via clang dang-main
 
 on:
   schedule:
