@@ -17,7 +17,7 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: clang
-          build_name: dang
+          build_name: dang_main
           command: build.sh
           build: dang
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
