@@ -37,7 +37,7 @@ compilers:
       #- { image: clang, build_name: clang_embed, command: build.sh, build: embed-trunk }
       # see https://github.com/compiler-explorer/clang-builder/issues/29
     - { image: clang, build_name: llvm_spirv, command: build.sh, build: llvm-spirv }
-    - { image: clang, build_name: dang_main, command: build.sh, build: dang }
+    - { image: clang, build_name: dang, command: build.sh, build: dang-main }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
