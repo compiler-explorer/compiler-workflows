@@ -27,15 +27,15 @@ jobs:
       - name: Start from a clean directory
         uses: AutoModality/action-clean@v1.1.0
       - uses: actions/checkout@v2
-      - name: Build ${{ inputs.image }} ${{inputs.version}} using ${{ inputs.command }}
+      - name: Build ${{ github.event.inputs.image }} ${{ github.event.inputs.version }} using ${{ github.event.inputs.command }}
         shell: bash
         id: build
         run: |
           mkdir dist
           chmod og+w dist # some builds don't run as root, so let anyone write here
           echo ::group::Docker build
-          docker run -v$(pwd)/dist:/dist --rm compilerexplorer/${{ inputs.image }}-builder \
-            bash ${{ inputs.command }} ${{ inputs.version }} \
+          docker run -v$(pwd)/dist:/dist --rm compilerexplorer/${{ github.event.inputs.image }}-builder \
+            bash ${{ github.event.inputs.command }} ${{ github.event.inputs.version }} \
             /dist | tee output.log
           echo ::endgroup::
           echo ::group::Translate docker output into GH variables
@@ -48,7 +48,7 @@ jobs:
         run: |
           echo ::set-output name=source::$(pwd)/dist/$(basename ${{ steps.build.outputs.output }})
           echo ::set-output name=s3dest::s3://compiler-explorer/opt/$(basename ${{ steps.build.outputs.output }})
-          echo ${{ steps.build.outputs.revision }} > ${{ inputs.build_name }}
+          echo ${{ steps.build.outputs.revision }} > ${{ github.event.inputs.build_name }}
       - name: Copy output to S3
         if: ${{ steps.build.outputs.status == 'OK' }}
         uses: prewk/s3-cp-action@v2
