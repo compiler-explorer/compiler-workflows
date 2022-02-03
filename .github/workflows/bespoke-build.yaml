@@ -2,10 +2,12 @@ name: Custom build of a non-trunk compiler
 
 on:
   workflow_dispatch:
+    inputs:
       image:
         type: choice
         description: Which docker image to use
         default: gcc
+        required: true
         options:
         - gcc
         - gcc-cross
