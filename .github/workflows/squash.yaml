@@ -20,7 +20,7 @@ jobs:
         run: |
           ls -l /opt
           whoami
-          git clone git@github.com:compiler-explorer/infra
+          git clone https://github.com/compiler-explorer/infra.git
           cd infra
           make ce
           ./bin/ce_install squash ${{ inputs.squash }}
