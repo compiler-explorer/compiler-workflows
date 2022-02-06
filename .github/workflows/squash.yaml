@@ -6,7 +6,7 @@ on:
       squash:
         description: Things to squash
         default: ''
-        required: true
+        required: false
 jobs:
   squash:
     runs-on: [ 'self-hosted', 'ce', 'ubuntu' ]
