@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of arm64 via gcc-cross arm64 trunk
+name: arm64 via gcc-cross arm64 trunk
 
 on:
   schedule:
@@ -17,8 +17,8 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: gcc-cross
-          build_name: arm64
+          name: arm64
           command: build.sh
-          build: arm64 trunk
+          args: arm64 trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

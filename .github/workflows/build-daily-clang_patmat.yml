@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of clang_patmat via clang patmat-trunk
+name: clang_patmat via clang patmat-trunk
 
 on:
   schedule:
@@ -17,8 +17,8 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: clang
-          build_name: clang_patmat
+          name: clang_patmat
           command: build.sh
-          build: patmat-trunk
+          args: patmat-trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

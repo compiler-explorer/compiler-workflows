@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of go via go trunk
+name: go via go trunk
 
 on:
   schedule:
@@ -17,8 +17,8 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: go
-          build_name: go
+          name: go
           command: build.sh
-          build: trunk
+          args: trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

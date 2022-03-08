@@ -8,7 +8,7 @@ import yaml
 
 import urllib.parse
 def make_yaml_doc(
-    friendly_name: str, image: str, build_name: str, command: str, build: str
+    friendly_name: str, image: str, name: str, command: str, args: str
 ) -> str:
     return f"""### DO NOT EDIT - created by a script ###
 name: {friendly_name}
@@ -29,9 +29,9 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: {image}
-          build_name: {build_name}
+          name: {name}
           command: {command}
-          build: {build}
+          args: {args}
           AWS_ACCESS_KEY_ID: ${{{{ secrets.AWS_ACCESS_KEY_ID }}}}
           AWS_SECRET_ACCESS_KEY: ${{{{ secrets.AWS_SECRET_ACCESS_KEY }}}}
 """
@@ -70,21 +70,21 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
     badges = {}
     for daily_compiler in yaml_doc["compilers"]["daily"]:
         image = daily_compiler["image"]
-        build_name = daily_compiler["build_name"]
-        command = daily_compiler["command"]
-        build = daily_compiler["build"]
-        build_yml = f"build-daily-{build_name}.yml"
-        friendly_name = f"Daily build of {build_name} via {image} {build}"
+        name = daily_compiler["name"]
+        command = daily_compiler.get("command", "build.sh")
+        args = daily_compiler.get("args", "trunk")
+        build_yml = f"build-daily-{name}.yml"
+        friendly_name = f"{name} via {image} {args}"
         (output_path / build_yml).write_text(
             make_yaml_doc(
                 friendly_name=friendly_name,
                 image=image,
-                build_name=build_name,
+                name=name,
                 command=command,
-                build=build,
+                args=args,
             )
         )
-        badges[friendly_name] = make_status_badges(friendly_name, build_name, build_yml)
+        badges[friendly_name] = make_status_badges(friendly_name, name, build_yml)
     status_file.write(f"## Build status\n\n")
     for name in sorted(badges.keys()):
         status_file.write(f"* {badges[name]}\n")

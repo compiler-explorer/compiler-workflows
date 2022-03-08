@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of gcc_contracts via gcc lock3-contracts-trunk
+name: gcc_contracts via gcc lock3-contracts-trunk
 
 on:
   schedule:
@@ -17,8 +17,8 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: gcc
-          build_name: gcc_contracts
+          name: gcc_contracts
           command: build.sh
-          build: lock3-contracts-trunk
+          args: lock3-contracts-trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

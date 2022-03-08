@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of cc65 via misc trunk
+name: cc65 via misc trunk
 
 on:
   schedule:
@@ -17,8 +17,8 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: misc
-          build_name: cc65
+          name: cc65
           command: buildcc65.sh
-          build: trunk
+          args: trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

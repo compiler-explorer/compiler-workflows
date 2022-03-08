@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: Daily build of clang_assertions via clang assertions-trunk
+name: clang_assertions via clang assertions-trunk
 
 on:
   schedule:
@@ -17,8 +17,8 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: clang
-          build_name: clang_assertions
+          name: clang_assertions
           command: build.sh
-          build: assertions-trunk
+          args: assertions-trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

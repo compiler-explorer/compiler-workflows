@@ -4,13 +4,13 @@ inputs:
   image:
     description: "Docker image to build with"
     required: true
-  build_name:
+  name:
     description: "Build name to de-duplicate unchanged code runs against"
     required: true
   command:
     description: "Command to run"
     required: true
-  build:
+  args:
     description: "Argument to command"
     required: true
   AWS_ACCESS_KEY_ID:
@@ -30,9 +30,9 @@ runs:
       shell: bash
       id: previous
       run: |
-        echo ::set-output name=revision::$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.build_name }} || true)
+        echo ::set-output name=revision::$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.name }} || true)
         ./pre-run.sh
-    - name: Daily build of ${{ inputs.build_name }}
+    - name: Daily build of ${{ inputs.name }}
       shell: bash
       id: build
       run: |
@@ -40,7 +40,7 @@ runs:
         chmod og+w dist # some builds don't run as root, so let anyone write here
         echo ::group::Docker build
         docker run -v$(pwd)/dist:/dist --rm compilerexplorer/${{ inputs.image }}-builder \
-          bash ${{ inputs.command }} ${{ inputs.build }} \
+          bash ${{ inputs.command }} ${{ inputs.args }} \
           /dist "${{ steps.previous.outputs.revision }}" | tee output.log
         echo ::endgroup::
         echo ::group::Translate docker output into GH variables
@@ -53,7 +53,7 @@ runs:
       run: |
         echo ::set-output name=source::$(pwd)/dist/$(basename ${{ steps.build.outputs.output }})
         echo ::set-output name=s3dest::s3://compiler-explorer/opt/$(basename ${{ steps.build.outputs.output }})
-        echo ${{ steps.build.outputs.revision }} > ${{ inputs.build_name }}
+        echo ${{ steps.build.outputs.revision }} > ${{ inputs.name }}
     - name: Copy output to S3
       if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       uses: prewk/s3-cp-action@v2
@@ -66,14 +66,14 @@ runs:
       if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       uses: prewk/s3-cp-action@v2
       with:
-        source: ${{ inputs.build_name }}
-        dest: s3://compiler-explorer/opt/.buildrevs/${{ inputs.build_name }}
+        source: ${{ inputs.name }}
+        dest: s3://compiler-explorer/opt/.buildrevs/${{ inputs.name }}
         aws_access_key_id: ${{ inputs.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
     - name: Update build logs
       shell: bash
       if: always()
-      run: ./post-run.sh "${{ inputs.build_name }}" "${{ steps.build.outputs.status }}" "${{ steps.filenames.outputs.s3dest }}" "${{ steps.previous.outputs.start }}"
+      run: ./post-run.sh "${{ inputs.name }}" "${{ steps.build.outputs.status }}" "${{ steps.filenames.outputs.s3dest }}" "${{ steps.previous.outputs.start }}"
       env:
         AWS_DEFAULT_REGION: us-east-1
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
