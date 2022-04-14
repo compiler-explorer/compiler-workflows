@@ -16,6 +16,7 @@ compilers:
     - { image: clang, name: clang_cppx, args: cppx-trunk }
     - { image: clang, name: clang_cppx_ext, args: cppx-ext-trunk }
     - { image: clang, name: clang_cppx_p2320, args: cppx-p2320-trunk }
+    - { image: clang, name: clang_p1061, args: p1061-trunk }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk }
     - { image: clang, name: clang_autonsdmi, args: autonsdmi-trunk }
     - { image: clang, name: clang_lifetime, args: lifetime-trunk }
