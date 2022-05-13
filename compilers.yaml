@@ -39,6 +39,7 @@ compilers:
       # see https://github.com/compiler-explorer/clang-builder/issues/29
     - { image: clang, name: llvm_spirv, args: llvm-spirv }
     - { image: clang, name: dang, args: dang-main }
+    - { image: clang, name: widberg, args: widberg-main }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
