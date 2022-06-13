@@ -24,6 +24,7 @@ compilers:
     - { image: clang, name: clang_patmat, args: patmat-trunk }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
     - { image: clang, name: clang_reflection, args: reflection-trunk }
+    - { image: clang, name: mlir, args: mlir-trunk }
     - { image: go, name: go }
     - { image: misc, name: tinycc, command: build-tinycc.sh }
     - { image: misc, name: cc65, command: buildcc65.sh }
