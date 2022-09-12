@@ -41,6 +41,7 @@ compilers:
       #- { image: clang, name: clang_embed, args: embed-trunk }
       # see https://github.com/compiler-explorer/clang-builder/issues/29
     - { image: clang, name: llvm_spirv, args: llvm-spirv }
+    - { image: clang, name: llvm_amdgpu, args: amd-stg-open }
     - { image: clang, name: dang, args: dang-main }
     - { image: clang, name: widberg, args: widberg-main }
     - { image: carbon, name: carbon }
