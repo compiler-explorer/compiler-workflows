@@ -35,6 +35,7 @@ compilers:
     - { image: misc, name: clean, command: build-clean.sh }
     - { image: misc, name: clspv, command: build-clspv.sh, args: main }
     - { image: misc, name: jakt, command: build-jakt.sh, args: trunk }
+    - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk }
     - { image: misc, name: dxc, command: build-dxc.sh, args: trunk }
     - { image: gcc-cross, name: arm32, args: "arm trunk" }
     - { image: gcc-cross, name: arm64, args: "arm64 trunk" }
