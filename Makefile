@@ -29,7 +29,7 @@ install-pre-commit: deps  ## Install pre-commit hooks
 
 .PHONY: test
 test: deps  ## Runs tests
-	env AWS=echo ./pre-run.sh
+	env AWS=echo GITHUB_OUTPUT=/dev/null ./pre-run.sh
 	env AWS=echo ./post-run.sh COMPILER STATUS OUTPUT_PATH 0
 
 .PHONY: build-yamls

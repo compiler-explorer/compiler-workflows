@@ -30,7 +30,7 @@ runs:
       shell: bash
       id: previous
       run: |
-        echo ::set-output name=revision::$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.name }} || true)
+        echo revision=$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.name }} || true) >> "${GITHUB_OUTPUT}"
         ./pre-run.sh
     - name: Daily build of ${{ inputs.name }}
       shell: bash
@@ -44,15 +44,15 @@ runs:
           /dist "${{ steps.previous.outputs.revision }}" | tee output.log
         echo ::endgroup::
         echo ::group::Translate docker output into GH variables
-        gawk -e 'match($0, /^ce-build-(\w+):(.*)/, m) { print "::set-output name=" m[1] "::" m[2]; }' output.log
+        gawk -e 'match($0, /^ce-build-(\w+):(.*)/, m) { print m[1] "=" m[2]; }' output.log >> "${GITHUB_OUTPUT}"
         echo ::endgroup::
     - name: Get output filename
       shell: bash
       if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       id: filenames
       run: |
-        echo ::set-output name=source::$(pwd)/dist/$(basename ${{ steps.build.outputs.output }})
-        echo ::set-output name=s3dest::s3://compiler-explorer/opt/$(basename ${{ steps.build.outputs.output }})
+        echo source=$(pwd)/dist/$(basename ${{ steps.build.outputs.output }}) >> "${GITHUB_OUTPUT}"
+        echo s3dest=s3://compiler-explorer/opt/$(basename ${{ steps.build.outputs.output }}) >> "${GITHUB_OUTPUT}"
         echo ${{ steps.build.outputs.revision }} > ${{ inputs.name }}
     - name: Copy output to S3
       if: ${{ steps.build.outputs.status != 'SKIPPED' }}
