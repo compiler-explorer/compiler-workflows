@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: dotnet via dotnet trunk
+name: dotnet via misc trunk
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
-          image: dotnet
+          image: misc
           name: dotnet
           command: build.sh
           args: trunk
