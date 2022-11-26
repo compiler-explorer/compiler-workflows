@@ -29,7 +29,7 @@ compilers:
     - { image: go, name: go }
     - { image: misc, name: tinycc, command: build-tinycc.sh }
     - { image: misc, name: cc65, command: buildcc65.sh }
-    - { image: misc, name: dotnet, args: trunk }
+    - { image: misc, name: dotnet, command: build-dotnet.sh, args: trunk }
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master }
     - { image: misc, name: cproc, command: build-cproc.sh, args: master }
     - { image: misc, name: rustc-cg-gcc_master, command: build-rustc-cg-gcc.sh, args: master }
