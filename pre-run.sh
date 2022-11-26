@@ -2,4 +2,4 @@
 
 set -exuo pipefail
 
-echo "::set-output name=start::$(date +%s)"
+echo "start=$(date +%s)" >> "${GITHUB_OUTPUT}"
