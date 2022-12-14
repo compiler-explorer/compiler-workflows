@@ -41,6 +41,7 @@ compilers:
     - { image: misc, name: dxc, command: build-dxc.sh, args: trunk }
     - { image: gcc-cross, name: arm32, args: "arm trunk" }
     - { image: gcc-cross, name: arm64, args: "arm64 trunk" }
+    - { image: gcc-cross, name: bpf, args: "bpf trunk" }
       # see https://github.com/compiler-explorer/clang-builder/issues/28
       #- { image: clang, name: clang_embed, args: embed-trunk }
       # see https://github.com/compiler-explorer/clang-builder/issues/29
