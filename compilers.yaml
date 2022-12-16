@@ -39,6 +39,7 @@ compilers:
     - { image: misc, name: jakt, command: build-jakt.sh, args: trunk }
     - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk }
     - { image: misc, name: dxc, command: build-dxc.sh, args: trunk }
+    - { image: misc, name: pahole, command: build-pahole.sh, args: trunk }
     - { image: gcc-cross, name: arm32, args: "arm trunk" }
     - { image: gcc-cross, name: arm64, args: "arm64 trunk" }
     - { image: gcc-cross, name: bpf, args: "bpf trunk" }
