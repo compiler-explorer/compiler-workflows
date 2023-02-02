@@ -33,7 +33,7 @@ compilers:
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master }
     - { image: misc, name: cproc, command: build-cproc.sh, args: master }
     - { image: misc, name: rustc-cg-gcc_master, command: build-rustc-cg-gcc.sh, args: master }
-    - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: master }
+    - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main }
     - { image: misc, name: clean, command: build-clean.sh }
     - { image: misc, name: clspv, command: build-clspv.sh, args: main }
     - { image: misc, name: jakt, command: build-jakt.sh, args: trunk }

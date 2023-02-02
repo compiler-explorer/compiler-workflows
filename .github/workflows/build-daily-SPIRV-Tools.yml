@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: SPIRV-Tools via misc master
+name: SPIRV-Tools via misc main
 
 on:
   schedule:
@@ -19,6 +19,6 @@ jobs:
           image: misc
           name: SPIRV-Tools
           command: build-spirv-tools.sh
-          args: master
+          args: main
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
