@@ -11,6 +11,7 @@ compilers:
     - { image: gcc, name: gcc_modules, args: cxx-modules-trunk }
     - { image: gcc, name: gcc_coroutines, args: cxx-coroutines-trunk }
     - { image: gcc, name: gcc_gccrs_master, args: gccrs-master }
+    - { image: gcc, name: gcc_cobol_master, args: cobol-master }
     - { image: clang, name: clang }
     - { image: clang, name: clang_amdgpu, args: rocm-trunk }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
