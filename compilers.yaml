@@ -53,6 +53,7 @@ compilers:
     - { image: carbon, name: carbon }
     - { image: ispc, name: ispc }
     - { image: ispc, name: ispc_templates_new, args: templates_new-trunk }
+    - { image: d8, name: d8 }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
