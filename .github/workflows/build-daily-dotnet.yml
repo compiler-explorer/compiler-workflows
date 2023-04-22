@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: dotnet via misc trunk
+name: dotnet via dotnet trunk
 
 on:
   schedule:
@@ -16,9 +16,9 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
-          image: misc
+          image: dotnet
           name: dotnet
-          command: build-dotnet.sh
+          command: build.sh
           args: trunk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
