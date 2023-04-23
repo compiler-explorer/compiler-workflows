@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: rustc-cg-gcc_master via misc master
+name: rustc-cg-gcc_master via rust-cg-gcc master
 
 on:
   schedule:
@@ -16,9 +16,9 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
-          image: misc
+          image: rust-cg-gcc
           name: rustc-cg-gcc_master
-          command: build-rustc-cg-gcc.sh
+          command: build.sh
           args: master
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
