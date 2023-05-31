@@ -28,6 +28,7 @@ compilers:
     - { image: clang, name: clang_reflection, args: reflection-trunk }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk }
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
+    - { image: mlir, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
     - { image: misc, name: tinycc, command: build-tinycc.sh }
     - { image: misc, name: cc65, command: buildcc65.sh }
