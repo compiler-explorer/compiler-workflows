@@ -1,4 +1,7 @@
 export POETRY_HOME=$(CURDIR)/.poetry
+# https://github.com/python-poetry/poetry/issues/1917
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+
 POETRY:=$(POETRY_HOME)/bin/poetry
 POETRY_DEPS:=$(POETRY_HOME)/.deps
 SYS_PYTHON:=$(shell command -v python3 || command -v python || echo .no-python-found)
