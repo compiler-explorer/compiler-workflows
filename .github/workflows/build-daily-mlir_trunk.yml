@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: mlir_trunk via mlir mlir-trunk
+name: mlir_trunk via clang mlir-trunk
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
-          image: mlir
+          image: clang
           name: mlir_trunk
           command: build.sh
           args: mlir-trunk
