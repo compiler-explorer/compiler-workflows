@@ -27,6 +27,7 @@ compilers:
     - { image: clang, name: clang_patmat, args: patmat-trunk }
     - { image: clang, name: clang_reflection, args: reflection-trunk }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk }
+    - { image: clang, name: clang_ir, args: clangir-trunk }
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
