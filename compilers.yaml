@@ -26,6 +26,7 @@ compilers:
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
     - { image: clang, name: clang_patmat, args: patmat-trunk }
     - { image: clang, name: clang_reflection, args: reflection-trunk }
+    - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk }
     - { image: clang, name: clang_ir, args: clangir-trunk }
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
