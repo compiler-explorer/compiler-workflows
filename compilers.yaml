@@ -63,6 +63,7 @@ compilers:
     - { image: ispc, name: ispc_templates_new, args: templates_new-trunk }
     - { image: d8, name: d8 }
     - { image: hylo, name: hylo }
+    - { image: vast, name: vast }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
