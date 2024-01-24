@@ -54,6 +54,8 @@ compilers:
     - { image: gcc-cross, name: riscv32, args: "riscv32 trunk" }
     - { image: gcc-cross, name: riscv64, args: "riscv64 trunk" }
     - { image: gcc-cross, name: bpf, args: "bpf trunk" }
+    - { image: gcc-cross, name: powerpc64, args: "powerpc64 trunk" }
+    - { image: gcc-cross, name: powerpc64le, args: "powerpc64le trunk" }
       # see https://github.com/compiler-explorer/clang-builder/issues/28
       #- { image: clang, name: clang_embed, args: embed-trunk }
       # see https://github.com/compiler-explorer/clang-builder/issues/29
