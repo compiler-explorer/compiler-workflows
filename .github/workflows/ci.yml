@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: pre-commit hooks
         run: env SKIP=test make pre-commit
       - name: tests
