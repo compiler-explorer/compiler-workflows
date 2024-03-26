@@ -68,6 +68,7 @@ compilers:
     - { image: d8, name: d8 }
     - { image: hylo, name: hylo }
     - { image: vast, name: vast }
+    - { image: mads, name: madpascal, args: trunk }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
