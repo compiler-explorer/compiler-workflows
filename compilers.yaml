@@ -75,6 +75,7 @@ compilers:
     - { image: hylo, name: hylo }
     - { image: vast, name: vast }
     - { image: mads, name: madpascal, args: trunk }
+    - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk}
 
   ad_hoc:
     - { image: gcc, command: build.sh }
