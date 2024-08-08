@@ -33,6 +33,7 @@ compilers:
     - { image: clang, name: clang_p3068, args: p3068-trunk }
     - { image: clang, name: clang_p3309, args: p3309-trunk }
     - { image: clang, name: clang_p3367, args: p3367-trunk }
+    - { image: clang, name: clang_p3372, args: p3372-trunk }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
     - { image: clang, name: clang_patmat, args: patmat-trunk }
     - { image: clang, name: clang_reflection, args: reflection-trunk }
