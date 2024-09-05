@@ -35,7 +35,10 @@ compilers:
     - { image: clang, name: clang_p3367, args: p3367-trunk }
     - { image: clang, name: clang_p3372, args: p3372-trunk }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
-    - { image: clang, name: clang_patmat, args: patmat-trunk }
+
+    # See https://github.com/compiler-explorer/compiler-explorer/issues/6827
+    # - { image: clang, name: clang_patmat, args: patmat-trunk }
+
     - { image: clang, name: clang_reflection, args: reflection-trunk }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk }
     - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk }
@@ -67,11 +70,17 @@ compilers:
       #- { image: clang, name: clang_embed, args: embed-trunk }
       # see https://github.com/compiler-explorer/clang-builder/issues/29
     - { image: clang, name: llvm_spirv, args: llvm-spirv }
-    - { image: clang, name: dang, args: dang-main }
+
+    # see https://github.com/compiler-explorer/compiler-explorer/issues/6836
+    # - { image: clang, name: dang, args: dang-main }
+
     - { image: clang, name: widberg, args: widberg-main }
     - { image: carbon, name: carbon }
     - { image: ispc, name: ispc }
-    - { image: ispc, name: ispc_templates_new, args: templates_new-trunk }
+
+    # See https://github.com/compiler-explorer/compiler-explorer/issues/6828
+    # - { image: ispc, name: ispc_templates_new, args: templates_new-trunk }
+
     - { image: d8, name: d8 }
     - { image: hylo, name: hylo }
     - { image: vast, name: vast }
