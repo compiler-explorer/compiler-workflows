@@ -24,7 +24,8 @@ compilers:
     - { image: clang, name: clang_cppx_p2320, args: cppx-p2320-trunk }
     - { image: clang, name: clang_dascandy_contracts, args: dascandy-contracts-trunk }
     - { image: clang, name: clang_ericwf_contracts, args: ericwf-contracts-trunk }
-    - { image: clang, name: clang_ir, args: clangir-trunk }
+      # See https://github.com/compiler-explorer/clang-builder/issues/75
+      #- { image: clang, name: clang_ir, args: clangir-trunk }
     - { image: clang, name: clang_lifetime, args: lifetime-trunk }
     - { image: clang, name: clang_llvmflang, args: llvmflang-trunk }
     - { image: clang, name: clang_mizvekov_resugar, args: mizvekov-resugar }
@@ -66,7 +67,6 @@ compilers:
     - { image: gcc-cross, name: powerpc64le, args: "powerpc64le trunk" }
       # see https://github.com/compiler-explorer/clang-builder/issues/28
       #- { image: clang, name: clang_embed, args: embed-trunk }
-      # see https://github.com/compiler-explorer/clang-builder/issues/29
     - { image: clang, name: llvm_spirv, args: llvm-spirv }
 
     # see https://github.com/compiler-explorer/compiler-explorer/issues/6836
@@ -79,7 +79,8 @@ compilers:
     # See https://github.com/compiler-explorer/compiler-explorer/issues/6828
     # - { image: ispc, name: ispc_templates_new, args: templates_new-trunk }
 
-    - { image: d8, name: d8 }
+    # See https://github.com/compiler-explorer/d8-builder/issues/2
+    # - { image: d8, name: d8 }
     - { image: hylo, name: hylo }
     - { image: vast, name: vast }
     - { image: mads, name: madpascal, args: trunk }
