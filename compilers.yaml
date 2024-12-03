@@ -31,6 +31,7 @@ compilers:
     - { image: clang, name: clang_mizvekov_resugar, args: mizvekov-resugar }
     - { image: clang, name: clang_p1061, args: p1061-trunk }
     - { image: clang, name: clang_p1974, args: p1974-trunk }
+    - { image: clang, name: clang_p2998, args: p2998-trunk }
     - { image: clang, name: clang_p3068, args: p3068-trunk }
     - { image: clang, name: clang_p3309, args: p3309-trunk }
     - { image: clang, name: clang_p3367, args: p3367-trunk }
