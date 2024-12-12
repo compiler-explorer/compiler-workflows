@@ -19,6 +19,7 @@ compilers:
     - { image: clang, name: clang_assertions, args: assertions-trunk }
     - { image: clang, name: clang_autonsdmi, args: autonsdmi-trunk }
     - { image: clang, name: clang_bb_p2996, args: bb-p2996-trunk }
+    - { image: clang, name: clang_chrisbazley, args: chrisbazley-trunk }
     - { image: clang, name: clang_cppx, args: cppx-trunk }
     - { image: clang, name: clang_cppx_ext, args: cppx-ext-trunk }
     - { image: clang, name: clang_cppx_p2320, args: cppx-p2320-trunk }
