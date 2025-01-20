@@ -19,7 +19,7 @@ deps: $(POETRY) $(POETRY_DEPS)
 $(POETRY): $(SYS_PYTHON)
 	curl -sSL https://install.python-poetry.org | $(SYS_PYTHON) -
 $(POETRY_DEPS): $(POETRY) pyproject.toml poetry.lock
-	$(POETRY) install --remove-untracked
+	$(POETRY) install
 	@touch $@
 
 .PHONY: pre-commit
