@@ -54,7 +54,7 @@ compilers:
     - { image: rust-cg-gcc, name: rustc-cg-gcc_master, command: build.sh, args: master }
     - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main }
     - { image: lc3, name: lc3, command: build.sh }
-    - { image: c2rust, name: c2rust, command: build.sh }
+    - { image: c2rust, name: c2rust, command: build.sh, args: master }
     - { image: misc, name: clspv, command: build-clspv.sh, args: main }
     - { image: misc, name: jakt, command: build-jakt.sh, args: trunk }
     - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk }
