@@ -77,7 +77,6 @@ compilers:
     # - { image: clang, name: dang, args: dang-main }
 
     - { image: clang, name: widberg, args: widberg-main }
-    - { image: carbon, name: carbon }
     - { image: ispc, name: ispc }
 
     # See https://github.com/compiler-explorer/compiler-explorer/issues/6828
