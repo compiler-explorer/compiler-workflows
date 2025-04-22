@@ -27,6 +27,7 @@ compilers:
     - { image: clang, name: clang_dascandy_contracts, args: dascandy-contracts-trunk }
       # See https://github.com/compiler-explorer/compiler-explorer/issues/7526
       # - { image: clang, name: clang_ericwf_contracts, args: ericwf-contracts-trunk }
+    - { image: clang, name: clang_implicit_constexpr, args: implicit-constexpr-trunk }
     - { image: clang, name: clang_ir, args: clangir-trunk }
     - { image: clang, name: clang_lifetime, args: lifetime-trunk }
     - { image: clang, name: clang_llvmflang, args: llvmflang-trunk }
