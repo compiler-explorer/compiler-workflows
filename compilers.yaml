@@ -26,6 +26,7 @@ compilers:
     - { image: clang, name: clang_cppx_p2320, args: cppx-p2320-trunk }
     - { image: clang, name: clang_dascandy_contracts, args: dascandy-contracts-trunk }
     - { image: clang, name: clang_ericwf_contracts, args: ericwf-contracts-trunk }
+    - { image: clang, name: clang_implicit_constexpr, args: implicit-constexpr-trunk }
     - { image: clang, name: clang_ir, args: clangir-trunk }
     - { image: clang, name: clang_lifetime, args: lifetime-trunk }
     - { image: clang, name: clang_llvmflang, args: llvmflang-trunk }
