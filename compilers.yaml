@@ -88,7 +88,8 @@ compilers:
     - { image: vast, name: vast }
     - { image: mads, name: madpascal, args: trunk }
     - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk}
-    - { image: clad, name: clad, args: trunk}
+    # See https://github.com/compiler-explorer/misc-builder/issues/115
+    # - { image: clad, name: clad, args: trunk}
     - { image: miri, name: miri, command: build.sh, args: nightly }
 
   ad_hoc:
