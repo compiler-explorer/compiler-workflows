@@ -93,6 +93,7 @@ compilers:
     - { image: mads, name: madpascal, args: trunk }
     - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk}
     - { image: clad, name: clad, args: trunk}
+    - { image: clad, name: clad-trunk-clang-21.1.0, args: trunk-clang-21.1.0}
     - { image: miri, name: miri, command: build.sh, args: nightly }
 
   ad_hoc:
