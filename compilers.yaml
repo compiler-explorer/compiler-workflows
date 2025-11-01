@@ -56,7 +56,6 @@ compilers:
     - { image: misc, name: tinycc, command: build-tinycc.sh }
     - { image: misc, name: cc65, command: buildcc65.sh }
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master }
-    - { image: misc, name: cproc, command: build-cproc.sh, args: master }
     - { image: rust-cg-gcc, name: rustc-cg-gcc_master, command: build.sh, args: master }
     - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main }
     - { image: lc3, name: lc3, command: build.sh }
