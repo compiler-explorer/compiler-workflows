@@ -11,6 +11,8 @@ compilers:
     - { image: gcc, name: gcc_contracts, args: lock3-contracts-trunk }
     - { image: gcc, name: gcc_contracts_labels, args: lock3-contracts-labels-trunk }
     - { image: gcc, name: gcc_contracts_nonattr, args: contracts-nonattr-trunk }
+    - { image: gcc, name: gcc_contracts_base, args: contracts-base-trunk }
+    - { image: gcc, name: gcc_contracts_gnu, args: contracts-GNUext-trunk }
     - { image: gcc, name: gcc_lambda_p2034, args: contracts-lambda-p2034-trunk }
     - { image: gcc, name: gcc_coroutines, args: cxx-coroutines-trunk }
     - { image: gcc, name: gcc_gccrs_master, args: gccrs-master }
