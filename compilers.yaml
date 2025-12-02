@@ -7,7 +7,6 @@ compilers:
     - { image: clang, name: llvm, args: llvm-trunk }
     - { image: gcc, name: gcc }
     - { image: gcc, name: gcc_cobol_master, args: cobol-master }
-    - { image: gcc, name: gcc_algol68_master, args: algol68-master }
     - { image: gcc, name: gcc_contracts, args: lock3-contracts-trunk }
     - { image: gcc, name: gcc_contracts_labels, args: lock3-contracts-labels-trunk }
     - { image: gcc, name: gcc_contracts_nonattr, args: contracts-nonattr-trunk }
