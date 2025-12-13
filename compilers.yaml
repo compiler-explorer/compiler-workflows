@@ -57,7 +57,7 @@ compilers:
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
     - { image: misc, name: tinycc, command: build-tinycc.sh }
-    - { image: misc, name: cc65, command: buildcc65.sh }
+    - { image: misc, name: cc65, command: buildcc65.sh, repos: ["https://github.com/cc65/cc65/tree/master"] }
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master }
     - { image: rust-cg-gcc, name: rustc-cg-gcc_master, command: build.sh, args: master }
     - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main }
