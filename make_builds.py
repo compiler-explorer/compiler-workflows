@@ -3,13 +3,15 @@
 from __future__ import annotations
 from typing import TextIO
 import click
+import json
 from pathlib import Path
 import yaml
 
 import urllib.parse
 def make_yaml_doc(
-    friendly_name: str, image: str, name: str, command: str, args: str
+    friendly_name: str, image: str, name: str, command: str, args: str, repos: list[str]
 ) -> str:
+    repos_json = json.dumps(repos)
     return f"""### DO NOT EDIT - created by a script ###
 name: {friendly_name}
 
@@ -32,6 +34,7 @@ jobs:
           name: {name}
           command: {command}
           args: {args}
+          repos: '{repos_json}'
           AWS_ACCESS_KEY_ID: ${{{{ secrets.AWS_ACCESS_KEY_ID }}}}
           AWS_SECRET_ACCESS_KEY: ${{{{ secrets.AWS_SECRET_ACCESS_KEY }}}}
 """
@@ -73,6 +76,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
         name = daily_compiler["name"]
         command = daily_compiler.get("command", "build.sh")
         args = daily_compiler.get("args", "trunk")
+        repos = daily_compiler.get("repos", [])
         build_yml = f"build-daily-{name}.yml"
         friendly_name = f"{name} via {image} {args}"
         (output_path / build_yml).write_text(
@@ -82,6 +86,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
                 name=name,
                 command=command,
                 args=args,
+                repos=repos,
             )
         )
         badges[friendly_name] = make_status_badges(friendly_name, name, build_yml)

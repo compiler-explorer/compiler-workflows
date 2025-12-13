@@ -94,7 +94,7 @@ compilers:
     # - { image: d8, name: d8 }
     - { image: hylo, name: hylo }
     - { image: vast, name: vast }
-    - { image: mads, name: madpascal, args: trunk }
+    - { image: mads, name: madpascal, args: trunk, repos: ["https://github.com/tebe6502/Mad-Assembler/tree/master", "https://github.com/tebe6502/Mad-Pascal/tree/master"] }
     - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk}
     - { image: clad, name: clad, args: trunk}
     - { image: clad, name: clad-trunk-clang-21.1.0, args: trunk-clang-21.1.0}
