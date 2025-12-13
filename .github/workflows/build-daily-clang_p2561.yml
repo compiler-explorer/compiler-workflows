@@ -20,6 +20,5 @@ jobs:
           name: clang_p2561
           command: build.sh
           args: p2561-trunk
-          repos: '[]'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

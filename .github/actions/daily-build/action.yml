@@ -19,14 +19,6 @@ inputs:
   AWS_SECRET_ACCESS_KEY:
     description: "Secret key"
     required: true
-  repos:
-    description: "JSON array of git repo URLs to check for recent activity"
-    required: false
-    default: "[]"
-  stale_days:
-    description: "Number of days without commits to consider a repo stale"
-    required: false
-    default: "7"
 
 runs:
   using: "composite"
@@ -40,55 +32,9 @@ runs:
       run: |
         echo revision=$(curl -sf https://compiler-explorer.s3.amazonaws.com/opt/.buildrevs/${{ inputs.name }} || true) >> "${GITHUB_OUTPUT}"
         ./pre-run.sh
-    - name: Check for recent commits
-      shell: bash
-      id: check-activity
-      run: |
-        REPOS='${{ inputs.repos }}'
-        STALE_DAYS='${{ inputs.stale_days }}'
-
-        if [ "$REPOS" = "[]" ] || [ -z "$REPOS" ]; then
-          echo "No repos specified, proceeding with build"
-          echo "should_build=true" >> "$GITHUB_OUTPUT"
-          exit 0
-        fi
-
-        SINCE_DATE=$(date -d "${STALE_DAYS} days ago" --iso-8601=seconds)
-        echo "Checking for commits since ${SINCE_DATE} (${STALE_DAYS} days ago)"
-        HAS_RECENT=false
-
-        for repo in $(echo "$REPOS" | jq -r '.[]'); do
-          # Use GitHub API to check for recent commits
-          # Extract owner/repo and optional branch from URL
-          # Supports: https://github.com/owner/repo or https://github.com/owner/repo/tree/branch
-          REPO_PATH=$(echo "$repo" | sed -E 's|https://github.com/([^/]+/[^/]+).*|\1|')
-          BRANCH=$(echo "$repo" | sed -n -E 's|https://github.com/[^/]+/[^/]+/tree/(.+)|\1|p')
-
-          if [ -n "$BRANCH" ]; then
-            echo "Checking $REPO_PATH (branch: $BRANCH) for recent commits..."
-            COMMITS=$(curl -sf "https://api.github.com/repos/${REPO_PATH}/commits?sha=${BRANCH}&since=${SINCE_DATE}&per_page=1" || echo "[]")
-          else
-            echo "Checking $REPO_PATH (default branch) for recent commits..."
-            COMMITS=$(curl -sf "https://api.github.com/repos/${REPO_PATH}/commits?since=${SINCE_DATE}&per_page=1" || echo "[]")
-          fi
-
-          if [ "$(echo "$COMMITS" | jq 'length')" -gt 0 ]; then
-            echo "Found recent commits in $repo"
-            HAS_RECENT=true
-            break
-          fi
-        done
-
-        if [ "$HAS_RECENT" = "true" ]; then
-          echo "should_build=true" >> "$GITHUB_OUTPUT"
-        else
-          echo "No recent commits in any repo (within ${STALE_DAYS} days), skipping build"
-          echo "should_build=false" >> "$GITHUB_OUTPUT"
-        fi
     - name: Daily build of ${{ inputs.name }}
       shell: bash
       id: build
-      if: ${{ steps.check-activity.outputs.should_build == 'true' }}
       run: |
         mkdir dist
         chmod og+w dist # some builds don't run as root, so let anyone write here
@@ -102,14 +48,14 @@ runs:
         echo ::endgroup::
     - name: Get output filename
       shell: bash
-      if: ${{ steps.check-activity.outputs.should_build == 'true' && steps.build.outputs.status != 'SKIPPED' }}
+      if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       id: filenames
       run: |
         echo source=$(pwd)/dist/$(basename ${{ steps.build.outputs.output }}) >> "${GITHUB_OUTPUT}"
         echo s3dest=s3://compiler-explorer/opt/$(basename ${{ steps.build.outputs.output }}) >> "${GITHUB_OUTPUT}"
         echo ${{ steps.build.outputs.revision }} > ${{ inputs.name }}
     - name: Copy output to S3
-      if: ${{ steps.check-activity.outputs.should_build == 'true' && steps.build.outputs.status != 'SKIPPED' }}
+      if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       uses: prewk/s3-cp-action@v2
       with:
         source: ${{ steps.filenames.outputs.source }}
@@ -117,7 +63,7 @@ runs:
         aws_access_key_id: ${{ inputs.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
     - name: Copy revision to S3
-      if: ${{ steps.check-activity.outputs.should_build == 'true' && steps.build.outputs.status != 'SKIPPED' }}
+      if: ${{ steps.build.outputs.status != 'SKIPPED' }}
       uses: prewk/s3-cp-action@v2
       with:
         source: ${{ inputs.name }}
@@ -127,13 +73,7 @@ runs:
     - name: Update build logs
       shell: bash
       if: always()
-      run: |
-        if [ "${{ steps.check-activity.outputs.should_build }}" = "false" ]; then
-          STATUS="SKIPPED_NO_ACTIVITY"
-        else
-          STATUS="${{ steps.build.outputs.status }}"
-        fi
-        ./post-run.sh "${{ inputs.name }}" "$STATUS" "${{ steps.filenames.outputs.s3dest }}" "${{ steps.previous.outputs.start }}"
+      run: ./post-run.sh "${{ inputs.name }}" "${{ steps.build.outputs.status }}" "${{ steps.filenames.outputs.s3dest }}" "${{ steps.previous.outputs.start }}"
       env:
         AWS_DEFAULT_REGION: us-east-1
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}

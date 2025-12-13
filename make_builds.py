@@ -8,11 +8,88 @@ from pathlib import Path
 import yaml
 
 import urllib.parse
+
+# Number of days without commits to consider a repo stale
+STALE_DAYS = 7
+
+
 def make_yaml_doc(
     friendly_name: str, image: str, name: str, command: str, args: str, repos: list[str]
 ) -> str:
-    repos_json = json.dumps(repos)
-    return f"""### DO NOT EDIT - created by a script ###
+    # If repos are specified, add a check-activity job that runs first on a cheap runner
+    if repos:
+        repos_json = json.dumps(repos)
+        return f"""### DO NOT EDIT - created by a script ###
+name: {friendly_name}
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-activity:
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{{{ steps.check.outputs.should_build }}}}
+    steps:
+      - name: Check for recent commits
+        id: check
+        run: |
+          REPOS='{repos_json}'
+          STALE_DAYS={STALE_DAYS}
+
+          SINCE_DATE=$(date -d "${{STALE_DAYS}} days ago" --iso-8601=seconds)
+          echo "Checking for commits since ${{SINCE_DATE}} (${{STALE_DAYS}} days ago)"
+          HAS_RECENT=false
+
+          for repo in $(echo "$REPOS" | jq -r '.[]'); do
+            REPO_PATH=$(echo "$repo" | sed -E 's|https://github.com/([^/]+/[^/]+).*|\\1|')
+            BRANCH=$(echo "$repo" | sed -n -E 's|https://github.com/[^/]+/[^/]+/tree/(.+)|\\1|p')
+
+            if [ -n "$BRANCH" ]; then
+              echo "Checking $REPO_PATH (branch: $BRANCH) for recent commits..."
+              COMMITS=$(curl -sf "https://api.github.com/repos/${{REPO_PATH}}/commits?sha=${{BRANCH}}&since=${{SINCE_DATE}}&per_page=1" || echo "[]")
+            else
+              echo "Checking $REPO_PATH (default branch) for recent commits..."
+              COMMITS=$(curl -sf "https://api.github.com/repos/${{REPO_PATH}}/commits?since=${{SINCE_DATE}}&per_page=1" || echo "[]")
+            fi
+
+            if [ "$(echo "$COMMITS" | jq 'length')" -gt 0 ]; then
+              echo "Found recent commits in $repo"
+              HAS_RECENT=true
+              break
+            fi
+          done
+
+          if [ "$HAS_RECENT" = "true" ]; then
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No recent commits in any repo (within ${{STALE_DAYS}} days), skipping build"
+            echo "should_build=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  daily-build:
+    needs: check-activity
+    if: ${{{{ needs.check-activity.outputs.should_build == 'true' }}}}
+    runs-on: [ 'self-hosted', 'ce', 'linux', 'x64' ]
+    steps:
+      - name: Start from a clean directory
+        uses: AutoModality/action-clean@v1.1.0
+      - uses: actions/checkout@v4
+      - name: Run the build
+        uses: ./.github/actions/daily-build
+        with:
+          image: {image}
+          name: {name}
+          command: {command}
+          args: {args}
+          AWS_ACCESS_KEY_ID: ${{{{ secrets.AWS_ACCESS_KEY_ID }}}}
+          AWS_SECRET_ACCESS_KEY: ${{{{ secrets.AWS_SECRET_ACCESS_KEY }}}}
+"""
+    else:
+        # No repos specified - simple workflow without activity check
+        return f"""### DO NOT EDIT - created by a script ###
 name: {friendly_name}
 
 on:
@@ -34,7 +111,6 @@ jobs:
           name: {name}
           command: {command}
           args: {args}
-          repos: '{repos_json}'
           AWS_ACCESS_KEY_ID: ${{{{ secrets.AWS_ACCESS_KEY_ID }}}}
           AWS_SECRET_ACCESS_KEY: ${{{{ secrets.AWS_SECRET_ACCESS_KEY }}}}
 """

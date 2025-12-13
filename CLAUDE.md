@@ -49,12 +49,12 @@ make install-pre-commit # Install pre-commit hooks
 
 ### Repo Activity Checking
 
-Compilers can specify a `repos` field with a list of GitHub repository URLs. If specified, the build will be skipped if none of the repos have commits in the last N days (default: 7). This reduces unnecessary builds for inactive projects.
+Compilers can specify a `repos` field with a list of GitHub repository URLs. If specified, a `check-activity` job runs first on `ubuntu-latest` to check for recent commits. The expensive `daily-build` job only runs if activity is found.
 
 - If ANY repo has recent commits, the build runs
 - If no `repos` field, builds always run (backwards compatible)
 - Branch can be specified in URL: `https://github.com/owner/repo/tree/branch-name`
-- Stale days can be adjusted in `.github/actions/daily-build/action.yml` (default: 7)
+- Stale days can be adjusted via `STALE_DAYS` constant in `make_builds.py` (default: 7)
 
 ### Build Process
 
