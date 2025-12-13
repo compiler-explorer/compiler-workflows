@@ -22,37 +22,37 @@ compilers:
     - { image: clang, name: clang }
     - { image: clang, name: clang_amdgpu, args: rocm-trunk }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
-    - { image: clang, name: clang_autonsdmi, args: autonsdmi-trunk }
-    - { image: clang, name: clang_bb_p2996, args: bb-p2996-trunk }
-    - { image: clang, name: clang_chrisbazley, args: chrisbazley-trunk }
-    - { image: clang, name: clang_cppx, args: cppx-trunk }
-    - { image: clang, name: clang_cppx_ext, args: cppx-ext-trunk }
-    - { image: clang, name: clang_cppx_p2320, args: cppx-p2320-trunk }
+    - { image: clang, name: clang_autonsdmi, args: autonsdmi-trunk, repos: ["https://github.com/cor3ntin/llvm-project/tree/experiments"] }
+    - { image: clang, name: clang_bb_p2996, args: bb-p2996-trunk, repos: ["https://github.com/bloomberg/clang-p2996/tree/p2996"] }
+    - { image: clang, name: clang_chrisbazley, args: chrisbazley-trunk, repos: ["https://github.com/chrisbazley/llvm-project/tree/main"] }
+    - { image: clang, name: clang_cppx, args: cppx-trunk, repos: ["https://github.com/lock3/meta/tree/compiler-explorer"] }
+    - { image: clang, name: clang_cppx_ext, args: cppx-ext-trunk, repos: ["https://github.com/lock3/cppx/tree/cppx"] }
+    - { image: clang, name: clang_cppx_p2320, args: cppx-p2320-trunk, repos: ["https://github.com/lock3/meta/tree/paper/p2320"] }
     # Apparently no longer public as of 2025-09-08
     # - { image: clang, name: clang_dascandy_contracts, args: dascandy-contracts-trunk }
-    - { image: clang, name: clang_ericwf_contracts, args: ericwf-contracts-trunk }
-    - { image: clang, name: clang_implicit_constexpr, args: implicit-constexpr-trunk }
-    - { image: clang, name: clang_ir, args: clangir-trunk }
-    - { image: clang, name: clang_lifetime, args: lifetime-trunk }
+    - { image: clang, name: clang_ericwf_contracts, args: ericwf-contracts-trunk, repos: ["https://github.com/efcs/llvm-project/tree/contracts-nightly"] }
+    - { image: clang, name: clang_implicit_constexpr, args: implicit-constexpr-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/feature/implicit-constexpr-flag"] }
+    - { image: clang, name: clang_ir, args: clangir-trunk, repos: ["https://github.com/llvm/clangir/tree/main"] }
+    - { image: clang, name: clang_lifetime, args: lifetime-trunk, repos: ["https://github.com/mgehre/llvm-project/tree/lifetime"] }
     - { image: clang, name: clang_llvmflang, args: llvmflang-trunk }
-    - { image: clang, name: clang_mizvekov_resugar, args: mizvekov-resugar }
-    - { image: clang, name: clang_p1061, args: p1061-trunk }
-    - { image: clang, name: clang_p1974, args: p1974-trunk }
-    - { image: clang, name: clang_p2561, args: p2561-trunk }
-    - { image: clang, name: clang_p2998, args: p2998-trunk }
-    - { image: clang, name: clang_p3068, args: p3068-trunk }
-    - { image: clang, name: clang_p3309, args: p3309-trunk }
-    - { image: clang, name: clang_p3367, args: p3367-trunk }
-    - { image: clang, name: clang_p3334, args: p3334-trunk }
-    - { image: clang, name: clang_p3372, args: p3372-trunk }
-    - { image: clang, name: clang_p3385, args: p3385-trunk }
-    - { image: clang, name: clang_p3412, args: p3412-trunk }
-    - { image: clang, name: clang_p3776, args: p3776-trunk }
+    - { image: clang, name: clang_mizvekov_resugar, args: mizvekov-resugar, repos: ["https://github.com/mizvekov/llvm-project/tree/resugar"] }
+    - { image: clang, name: clang_p1061, args: p1061-trunk, repos: ["https://github.com/ricejasonf/llvm-project/tree/ricejasonf/p1061"] }
+    - { image: clang, name: clang_p1974, args: p1974-trunk, repos: ["https://github.com/je4d/llvm-project/tree/godbolt/propconst"] }
+    - { image: clang, name: clang_p2561, args: p2561-trunk, repos: ["https://github.com/vasama/llvm/tree/P2561"] }
+    - { image: clang, name: clang_p2998, args: p2998-trunk, repos: ["https://github.com/Bekenn/llvm-project/tree/p2998"] }
+    - { image: clang, name: clang_p3068, args: p3068-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3068-constexpr-exceptions"] }
+    - { image: clang, name: clang_p3309, args: p3309-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3309-constexpr-atomic-and-atomic-ref"] }
+    - { image: clang, name: clang_p3367, args: p3367-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3367-constexpr-coroutines"] }
+    - { image: clang, name: clang_p3334, args: p3334-trunk, repos: ["https://github.com/tal-yac/llvm-project/tree/p3334-cross-static"] }
+    - { image: clang, name: clang_p3372, args: p3372-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3372-constexpr-containers-and-adaptors"] }
+    - { image: clang, name: clang_p3385, args: p3385-trunk, repos: ["https://github.com/zebullax/clang-p2996/tree/3385R5"] }
+    - { image: clang, name: clang_p3412, args: p3412-trunk, repos: ["https://github.com/BengtGustafsson/llvm-project-UTP/tree/f-literals"] }
+    - { image: clang, name: clang_p3776, args: p3776-trunk, repos: ["https://github.com/term-est/llvm-project/tree/P3776-More-Trailing-Commas"] }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
-    - { image: clang, name: clang_patmat, args: patmat-trunk }
-    - { image: clang, name: clang_reflection, args: reflection-trunk }
-    - { image: clang, name: clang_relocatable, args: relocatable-trunk }
-    - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk }
+    - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
+    - { image: clang, name: clang_reflection, args: reflection-trunk, repos: ["https://github.com/matus-chochlik/llvm-project/tree/reflection"] }
+    - { image: clang, name: clang_relocatable, args: relocatable-trunk, repos: ["https://github.com/Quuxplusone/llvm-project/tree/trivially-relocatable"] }
+    - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk, repos: ["https://github.com/dancrn/llvm-project/tree/cxx-variadic-friends"] }
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
@@ -84,7 +84,7 @@ compilers:
     # see https://github.com/compiler-explorer/compiler-explorer/issues/6836
     # - { image: clang, name: dang, args: dang-main }
 
-    - { image: clang, name: widberg, args: widberg-main }
+    - { image: clang, name: widberg, args: widberg-main, repos: ["https://github.com/widberg/llvm-project-widberg-extensions/tree/main"] }
     - { image: ispc, name: ispc }
 
     # See https://github.com/compiler-explorer/compiler-explorer/issues/6828
