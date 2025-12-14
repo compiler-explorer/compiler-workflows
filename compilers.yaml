@@ -63,10 +63,10 @@ compilers:
     - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main }
     - { image: lc3, name: lc3, command: build.sh }
     - { image: c2rust, name: c2rust, command: build.sh, args: master }
-    - { image: misc, name: clspv, command: build-clspv.sh, args: main }
-    - { image: jakt, name: jakt, command: build.sh, args: trunk }
-    - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk }
-    - { image: misc, name: dxc, command: build-dxc.sh, args: trunk }
+    - { image: misc, name: clspv, command: build-clspv.sh, args: main, repos: ["https://github.com/google/clspv/tree/main"] }
+    - { image: jakt, name: jakt, command: build.sh, args: trunk, repos: ["https://github.com/SerenityOS/jakt/tree/main"] }
+    - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk, repos: ["https://github.com/hsutter/cppfront/tree/main"] }
+    - { image: misc, name: dxc, command: build-dxc.sh, args: trunk, repos: ["https://github.com/microsoft/DirectXShaderCompiler/tree/main"] }
     - { image: misc, name: pahole, command: build-pahole.sh, args: trunk }
     - { image: misc, name: movfuscator, command: build-movfuscator.sh }
     - { image: misc, name: wyrm, command: build-wyrm-transpiler.sh }
@@ -79,7 +79,7 @@ compilers:
     - { image: gcc-cross, name: powerpc64le, args: "powerpc64le trunk" }
       # see https://github.com/compiler-explorer/clang-builder/issues/28
       #- { image: clang, name: clang_embed, args: embed-trunk }
-    - { image: clang, name: llvm_spirv, args: llvm-spirv }
+    - { image: clang, name: llvm_spirv, args: llvm-spirv, repos: ["https://github.com/KhronosGroup/SPIRV-Tools/tree/main"] }
 
     # see https://github.com/compiler-explorer/compiler-explorer/issues/6836
     # - { image: clang, name: dang, args: dang-main }
@@ -92,8 +92,8 @@ compilers:
 
     # See https://github.com/compiler-explorer/d8-builder/issues/2
     # - { image: d8, name: d8 }
-    - { image: hylo, name: hylo }
-    - { image: vast, name: vast }
+    - { image: hylo, name: hylo, repos: ["https://github.com/hylo-lang/hylo/tree/main"] }
+    - { image: vast, name: vast, repos: ["https://github.com/trailofbits/vast/tree/master"] }
     - { image: mads, name: madpascal, args: trunk, repos: ["https://github.com/tebe6502/Mad-Assembler/tree/master", "https://github.com/tebe6502/Mad-Pascal/tree/master"] }
     - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk}
     - { image: clad, name: clad, args: trunk}
