@@ -14,6 +14,7 @@ compilers:
     - { image: gcc, name: gcc_contracts_gnu, args: contracts-GNUext-trunk }
     - { image: gcc, name: gcc_lambda_p2034, args: contracts-lambda-p2034-trunk }
     - { image: gcc, name: gcc_coroutines, args: cxx-coroutines-trunk }
+    - { image: gcc, name: gcc_trivial_relocation, args: trivial-relocation-trunk }
     - { image: gcc, name: gcc_gccrs_master, args: gccrs-master }
     - { image: gcc, name: gcc_modules, args: cxx-modules-trunk }
     - { image: gcc, name: gcc_p1144, args: p1144-trunk }
