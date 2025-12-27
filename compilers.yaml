@@ -103,7 +103,7 @@ compilers:
     - { image: clad, name: clad, args: trunk}
     - { image: clad, name: clad-trunk-clang-21.1.0, args: trunk-clang-21.1.0}
     - { image: miri, name: miri, command: build.sh, args: nightly }
-    - { image: micropython, name: micropython, command: build.sh, args: preview, repos: ["https://github.com/micropython/micropython/tree/master"] }
+    - { image: micropython, name: micropython, command: build.sh, args: preview }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
