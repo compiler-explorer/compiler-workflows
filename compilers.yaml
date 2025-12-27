@@ -55,6 +55,7 @@ compilers:
     - { image: clang, name: clang_reflection, args: reflection-trunk, repos: ["https://github.com/matus-chochlik/llvm-project/tree/reflection"] }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk, repos: ["https://github.com/Quuxplusone/llvm-project/tree/trivially-relocatable"] }
     - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk, repos: ["https://github.com/dancrn/llvm-project/tree/cxx-variadic-friends"] }
+    - { image: clang, name: clang_hana, args: hana-clang-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/compiler-explorer/hana-clang"] }
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
