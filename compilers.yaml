@@ -42,7 +42,7 @@ compilers:
     - { image: clang, name: clang_p2561, args: p2561-trunk, repos: ["https://github.com/vasama/llvm/tree/P2561"] }
     - { image: clang, name: clang_p2998, args: p2998-trunk, repos: ["https://github.com/Bekenn/llvm-project/tree/p2998"] }
     - { image: clang, name: clang_p3068, args: p3068-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3068-constexpr-exceptions"] }
-    - { image: clang, name: clang_p3039, ards: p3039-trunk, repos: ["https://github.com/Imagix/llvm-project-p3039/tree/p3039experimental"] }
+    - { image: clang, name: clang_p3039, args: p3039-trunk, repos: ["https://github.com/Imagix/llvm-project-p3039/tree/p3039experimental"] }
     - { image: clang, name: clang_p3309, args: p3309-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3309-constexpr-atomic-and-atomic-ref"] }
     - { image: clang, name: clang_p3367, args: p3367-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3367-constexpr-coroutines"] }
     - { image: clang, name: clang_hana, args: hana-clang-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/compiler-explorer/hana-clang"] }
