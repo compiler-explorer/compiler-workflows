@@ -1,0 +1,38 @@
+name: Install compiler(s)
+run-name: Install ${{ inputs.compilers }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      compilers:
+        description: 'Compiler pattern to install (e.g., "clang hana-clang-trunk")'
+        required: true
+        type: string
+      enable_nightly:
+        description: 'Enable nightly builds'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  install:
+    runs-on: ['self-hosted', 'ce', 'ubuntu']
+    steps:
+      - name: Checkout infra repo
+        uses: actions/checkout@v4
+        with:
+          repository: compiler-explorer/infra
+          path: infra
+
+      - name: Set up environment
+        working-directory: infra
+        run: make ce
+
+      - name: Install compilers
+        working-directory: infra
+        run: |
+          ENABLE_FLAG=""
+          if [[ "${{ inputs.enable_nightly }}" == "true" ]]; then
+            ENABLE_FLAG="--enable nightly"
+          fi
+          sudo bin/ce_install --check-user nobody $ENABLE_FLAG install ${{ inputs.compilers }}
