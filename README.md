@@ -24,7 +24,7 @@ Instead do following:
 If you build and administrate a branch of a compiler, then you can ask
 to be added to the "External Compiler Devs" team on GitHub. This will
 give you write permissions to this repo which will let you trigger your
-compiler's build _and_ trigger a deploy too. There's more mischief you
+compiler's build _and_ trigger an installation too. There's more mischief you
 could get up to too: so we will only add trusted, known accounts to this
 team.
 
@@ -44,7 +44,7 @@ Contact Matt directly by email, or on Discord to be added to the group.
    build if we think there has been no changes. Check you pushed your compiler's
    changes if not, else contact the admins on Discord
 8. Ensure everything goes green
-9. Trigger a installation
+9. Trigger an installation
 
 ### Triggering an installation
 
@@ -62,7 +62,7 @@ Installing compilers/c++/nightly/clang hana-clang-trunk
 1 packages installed OK, 0 skipped, and 0 failed installation
 ```
 
-(the warning is fine, the in-compiler explorer version number may not update until the next build, though I may fix this).
+(the warning is fine, the version number shown in Compiler Explorer may not update until the next build, though I may fix this).
 
 The new version should be immediately available on the live site.
 
