@@ -13,11 +13,19 @@ on:
         required: false
         type: boolean
         default: true
+      force:
+        description: 'Force install even if would otherwise skip'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   install:
     runs-on: ['self-hosted', 'ce', 'linux', 'x64']
     steps:
+      - name: Start from a clean directory
+        uses: AutoModality/action-clean@v1.1.0
+
       - name: Checkout infra repo
         uses: actions/checkout@v4
         with:
@@ -35,4 +43,8 @@ jobs:
           if [[ "${{ inputs.enable_nightly }}" == "true" ]]; then
             ENABLE_FLAG="--enable nightly"
           fi
-          sudo bin/ce_install --check-user nobody $ENABLE_FLAG install ${{ inputs.compilers }}
+          FORCE_FLAG=""
+          if [[ "${{ inputs.force }}" == "true" ]]; then
+            FORCE_FLAG="--force"
+          fi
+          sudo bin/ce_install --check-user nobody $ENABLE_FLAG install $FORCE_FLAG ${{ inputs.compilers }}
