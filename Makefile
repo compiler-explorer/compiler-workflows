@@ -17,7 +17,7 @@ $(SYS_PYTHON):
 .PHONY: deps
 deps: $(POETRY) $(POETRY_DEPS)
 $(POETRY): $(SYS_PYTHON)
-	curl -sSL https://install.python-poetry.org | $(SYS_PYTHON) -
+	curl -sSL https://install.python-poetry.org | $(SYS_PYTHON) - --version 1.8.5
 $(POETRY_DEPS): $(POETRY) pyproject.toml poetry.lock
 	$(POETRY) install
 	@touch $@
