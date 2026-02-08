@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: ccc via ccc trunk
+name: ccc via ccc main
 
 on:
   schedule:
@@ -62,6 +62,6 @@ jobs:
           image: ccc
           name: ccc
           command: build.sh
-          args: trunk
+          args: main
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
