@@ -60,6 +60,7 @@ compilers:
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
+    - { image: ccc, name: ccc, command: build.sh, args: main, repos: ["https://github.com/anthropics/claudes-c-compiler/tree/main"] }
     - { image: misc, name: tinycc, command: build-tinycc.sh }
     - { image: misc, name: cc65, command: buildcc65.sh, repos: ["https://github.com/cc65/cc65/tree/master"] }
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master }
