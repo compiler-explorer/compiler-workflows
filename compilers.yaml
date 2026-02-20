@@ -50,6 +50,7 @@ compilers:
     - { image: clang, name: clang_p3385, args: p3385-trunk, repos: ["https://github.com/zebullax/clang-p2996/tree/3385R5"] }
     - { image: clang, name: clang_p3412, args: p3412-trunk, repos: ["https://github.com/BengtGustafsson/llvm-project-UTP/tree/f-literals"] }
     - { image: clang, name: clang_p3776, args: p3776-trunk, repos: ["https://github.com/term-est/llvm-project/tree/P3776-More-Trailing-Commas"] }
+    - { image: clang, name: clang_p3822, args: p3822-trunk, repos: ["https://github.com/yuxuanchen1997/llvm-project/tree/users/yuxuanchen1997/p3822r0-requirements-noexcept"] }
     - { image: clang, name: clang_p3951, args: p3951-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/template-strings"] }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
     - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
