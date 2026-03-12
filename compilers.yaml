@@ -7,20 +7,20 @@ compilers:
     - { image: clang, name: llvm, args: llvm-trunk }
     - { image: gcc, name: gcc }
     - { image: gcc, name: gcc_cobol_master, args: cobol-master }
-    - { image: gcc, name: gcc_contracts, args: lock3-contracts-trunk }
-    - { image: gcc, name: gcc_contracts_labels, args: lock3-contracts-labels-trunk }
-    - { image: gcc, name: gcc_contracts_nonattr, args: contracts-nonattr-trunk }
-    - { image: gcc, name: gcc_contracts_base, args: contracts-base-trunk }
-    - { image: gcc, name: gcc_contracts_gnu, args: contracts-GNUext-trunk }
-    - { image: gcc, name: gcc_lambda_p2034, args: contracts-lambda-p2034-trunk }
-    - { image: gcc, name: gcc_coroutines, args: cxx-coroutines-trunk }
-    - { image: gcc, name: gcc_trivial_relocation, args: trivial-relocation-trunk }
-    - { image: gcc, name: gcc_gccrs_master, args: gccrs-master }
+    - { image: gcc, name: gcc_contracts, args: lock3-contracts-trunk, repos: ["https://github.com/lock3/gcc/tree/contracts"] }
+    - { image: gcc, name: gcc_contracts_labels, args: lock3-contracts-labels-trunk, repos: ["https://github.com/lock3/gcc/tree/contract-labels"] }
+    - { image: gcc, name: gcc_contracts_nonattr, args: contracts-nonattr-trunk, repos: ["https://github.com/villevoutilainen/gcc/tree/contracts-nonattr"] }
+    - { image: gcc, name: gcc_contracts_base, args: contracts-base-trunk, repos: ["https://github.com/iains/gcc-git/tree/C++26-contracts-base"] }
+    - { image: gcc, name: gcc_contracts_gnu, args: contracts-GNUext-trunk, repos: ["https://github.com/iains/gcc-git/tree/C++26-contracts-GNU-extensions"] }
+    - { image: gcc, name: gcc_lambda_p2034, args: contracts-lambda-p2034-trunk, repos: ["https://github.com/villevoutilainen/gcc/tree/lambda-p2034"] }
+    - { image: gcc, name: gcc_coroutines, args: cxx-coroutines-trunk, repos: ["https://github.com/iains/gcc-cxx-coroutines/tree/c++-coroutines"] }
+    - { image: gcc, name: gcc_trivial_relocation, args: trivial-relocation-trunk, repos: ["https://github.com/iains/gcc-git/tree/C++2z-trivial-relocation"] }
+    - { image: gcc, name: gcc_gccrs_master, args: gccrs-master, repos: ["https://github.com/Rust-GCC/gccrs/tree/master"] }
     - { image: gcc, name: gcc_modules, args: cxx-modules-trunk }
-    - { image: gcc, name: gcc_p1144, args: p1144-trunk }
-    - { image: gcc, name: gcc_thomas_healy, args: thomas-healy-trunk }
+    - { image: gcc, name: gcc_p1144, args: p1144-trunk, repos: ["https://github.com/Quuxplusone/gcc/tree/trivially-relocatable"] }
+    - { image: gcc, name: gcc_thomas_healy, args: thomas-healy-trunk, repos: ["https://github.com/healytpk/gcc-thomas-healy/tree/trunk"] }
     - { image: clang, name: clang }
-    - { image: clang, name: clang_amdgpu, args: rocm-trunk }
+    - { image: clang, name: clang_amdgpu, args: rocm-trunk, repos: ["https://github.com/ROCm/llvm-project/tree/amd-staging"] }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
     - { image: clang, name: clang_autonsdmi, args: autonsdmi-trunk, repos: ["https://github.com/cor3ntin/llvm-project/tree/experiments"] }
     - { image: clang, name: clang_bb_p2996, args: bb-p2996-trunk, repos: ["https://github.com/bloomberg/clang-p2996/tree/p2996"] }
@@ -52,32 +52,32 @@ compilers:
     - { image: clang, name: clang_p3776, args: p3776-trunk, repos: ["https://github.com/term-est/llvm-project/tree/P3776-More-Trailing-Commas"] }
     - { image: clang, name: clang_p3822, args: p3822-trunk, repos: ["https://github.com/yuxuanchen1997/llvm-project/tree/users/yuxuanchen1997/p3822r0-requirements-noexcept"] }
     - { image: clang, name: clang_p3951, args: p3951-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/template-strings"] }
-    - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh }
+    - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh, repos: ["https://github.com/ricejasonf/parametric_expressions/tree/master"] }
     - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
     - { image: clang, name: clang_reflection, args: reflection-trunk, repos: ["https://github.com/matus-chochlik/llvm-project/tree/reflection"] }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk, repos: ["https://github.com/Quuxplusone/llvm-project/tree/trivially-relocatable"] }
     - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk, repos: ["https://github.com/dancrn/llvm-project/tree/cxx-variadic-friends"] }
     - { image: clang, name: clang_hana, args: hana-clang-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/compiler-explorer/hana-clang"] }
     - { image: clang, name: clang_swiftlang, args: swiftlang-trunk, repos: ["https://github.com/swiftlang/llvm-project/tree/next"] }
-    - { image: dotnet, name: dotnet, command: build.sh, args: trunk }
+    - { image: dotnet, name: dotnet, command: build.sh, args: trunk, repos: ["https://github.com/dotnet/runtime"] }
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go }
     - { image: ccc, name: ccc, command: build.sh, args: main, repos: ["https://github.com/anthropics/claudes-c-compiler/tree/main"] }
     - { image: misc, name: tinycc, command: build-tinycc.sh }
     - { image: misc, name: cc65, command: buildcc65.sh, repos: ["https://github.com/cc65/cc65/tree/master"] }
-    - { image: misc, name: mrustc, command: build-mrustc.sh, args: master }
-    - { image: rust-cg-gcc, name: rustc-cg-gcc_master, command: build.sh, args: master }
-    - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main }
-    - { image: lc3, name: lc3, command: build.sh }
-    - { image: c2rust, name: c2rust, command: build.sh, args: master }
+    - { image: misc, name: mrustc, command: build-mrustc.sh, args: master, repos: ["https://github.com/thepowersgang/mrustc/tree/master"] }
+    - { image: rust-cg-gcc, name: rustc-cg-gcc_master, command: build.sh, args: master, repos: ["https://github.com/rust-lang/rustc_codegen_gcc/tree/master", "https://github.com/rust-lang/gcc/tree/master"] }
+    - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main, repos: ["https://github.com/KhronosGroup/SPIRV-Tools/tree/main"] }
+    - { image: lc3, name: lc3, command: build.sh, repos: ["https://github.com/xavierrouth/lc3-compiler"] }
+    - { image: c2rust, name: c2rust, command: build.sh, args: master, repos: ["https://github.com/immunant/c2rust/tree/master"] }
     - { image: misc, name: clspv, command: build-clspv.sh, args: main, repos: ["https://github.com/google/clspv/tree/main"] }
     - { image: jakt, name: jakt, command: build.sh, args: trunk, repos: ["https://github.com/SerenityOS/jakt/tree/main"] }
     - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk, repos: ["https://github.com/hsutter/cppfront/tree/main"] }
     - { image: misc, name: dxc, command: build-dxc.sh, args: trunk, repos: ["https://github.com/microsoft/DirectXShaderCompiler/tree/main"] }
     - { image: misc, name: pahole, command: build-pahole.sh, args: trunk }
-    - { image: misc, name: movfuscator, command: build-movfuscator.sh }
-    - { image: misc, name: wyrm, command: build-wyrm-transpiler.sh }
-    - { image: ncc-ng, name: ncc-ng, command: build.sh, args: trunk }
+    - { image: misc, name: movfuscator, command: build-movfuscator.sh, repos: ["https://github.com/xoreaxeaxeax/movfuscator/tree/master"] }
+    - { image: misc, name: wyrm, command: build-wyrm-transpiler.sh, repos: ["https://github.com/jeremy-rifkin/wyrm/tree/main"] }
+    - { image: ncc-ng, name: ncc-ng, command: build.sh, args: trunk, repos: ["https://github.com/Norcroft/ncc-ng/tree/trunk"] }
     - { image: gcc-cross, name: arm32, args: "arm trunk" }
     - { image: gcc-cross, name: arm64, args: "arm64 trunk" }
     - { image: gcc-cross, name: riscv32, args: "riscv32 trunk" }
@@ -93,7 +93,7 @@ compilers:
     # - { image: clang, name: dang, args: dang-main }
 
     - { image: clang, name: widberg, args: widberg-main, repos: ["https://github.com/widberg/llvm-project-widberg-extensions/tree/main"] }
-    - { image: ispc, name: ispc }
+    - { image: ispc, name: ispc, repos: ["https://github.com/ispc/ispc"] }
 
     # See https://github.com/compiler-explorer/compiler-explorer/issues/6828
     # - { image: ispc, name: ispc_templates_new, args: templates_new-trunk }
@@ -103,11 +103,11 @@ compilers:
     - { image: hylo, name: hylo, repos: ["https://github.com/hylo-lang/hylo/tree/main"] }
     - { image: vast, name: vast, repos: ["https://github.com/trailofbits/vast/tree/master"] }
     - { image: mads, name: madpascal, args: trunk, repos: ["https://github.com/tebe6502/Mad-Assembler/tree/master", "https://github.com/tebe6502/Mad-Pascal/tree/master"] }
-    - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk}
-    - { image: clad, name: clad, args: trunk}
-    - { image: clad, name: clad-trunk-clang-21.1.0, args: trunk-clang-21.1.0}
+    - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk, repos: ["https://github.com/llvm/circt/tree/main"] }
+    - { image: clad, name: clad, args: trunk, repos: ["https://github.com/vgvassilev/clad/tree/master"] }
+    - { image: clad, name: clad-trunk-clang-21.1.0, args: trunk-clang-21.1.0, repos: ["https://github.com/vgvassilev/clad/tree/master"] }
     - { image: miri, name: miri, command: build.sh, args: nightly }
-    - { image: micropython, name: micropython, command: build.sh, args: preview }
+    - { image: micropython, name: micropython, command: build.sh, args: preview, repos: ["https://github.com/micropython/micropython"] }
 
   ad_hoc:
     - { image: gcc, command: build.sh }
