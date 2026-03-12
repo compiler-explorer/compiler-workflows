@@ -12,10 +12,18 @@ import urllib.parse
 # Number of days without commits to consider a repo stale
 STALE_DAYS = 7
 
+SIZE_TO_LABELS = {
+    "large": "[ 'self-hosted', 'ce', 'linux', 'x64' ]",
+    "medium": "[ 'self-hosted', 'ce', 'linux', 'x64', 'medium' ]",
+    "small": "[ 'self-hosted', 'ce', 'linux', 'x64', 'small' ]",
+}
+
 
 def make_yaml_doc(
-    friendly_name: str, image: str, name: str, command: str, args: str, repos: list[str]
+    friendly_name: str, image: str, name: str, command: str, args: str, repos: list[str],
+    size: str = "large",
 ) -> str:
+    runs_on = SIZE_TO_LABELS[size]
     # If repos are specified, add a check-activity job that runs first on a cheap runner
     if repos:
         repos_json = json.dumps(repos)
@@ -72,7 +80,7 @@ jobs:
   daily-build:
     needs: check-activity
     if: ${{{{ needs.check-activity.outputs.should_build == 'true' }}}}
-    runs-on: [ 'self-hosted', 'ce', 'linux', 'x64' ]
+    runs-on: {runs_on}
     steps:
       - name: Start from a clean directory
         uses: AutoModality/action-clean@v1.1.0
@@ -99,7 +107,7 @@ on:
 
 jobs:
   daily-build:
-    runs-on: [ 'self-hosted', 'ce', 'linux', 'x64' ]
+    runs-on: {runs_on}
     steps:
       - name: Start from a clean directory
         uses: AutoModality/action-clean@v1.1.0
@@ -153,6 +161,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
         command = daily_compiler.get("command", "build.sh")
         args = daily_compiler.get("args", "trunk")
         repos = daily_compiler.get("repos", [])
+        size = daily_compiler.get("size", "large")
         build_yml = f"build-daily-{name}.yml"
         friendly_name = f"{name} via {image} {args}"
         (output_path / build_yml).write_text(
@@ -163,6 +172,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
                 command=command,
                 args=args,
                 repos=repos,
+                size=size,
             )
         )
         badges[friendly_name] = make_status_badges(friendly_name, name, build_yml)
