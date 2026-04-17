@@ -66,7 +66,6 @@ compilers:
     - { image: misc, name: tinycc, command: build-tinycc.sh , size: small}
     - { image: misc, name: cc65, command: buildcc65.sh, repos: ["https://github.com/cc65/cc65/tree/master"] , size: small}
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master, repos: ["https://github.com/thepowersgang/mrustc/tree/master"] , size: small}
-    - { image: rust-cg-gcc, name: rustc-cg-gcc_master, command: build.sh, args: master, repos: ["https://github.com/rust-lang/rustc_codegen_gcc/tree/master", "https://github.com/rust-lang/gcc/tree/master"] }
     - { image: misc, name: SPIRV-Tools, command: build-spirv-tools.sh, args: main, repos: ["https://github.com/KhronosGroup/SPIRV-Tools/tree/main"] }
     - { image: lc3, name: lc3, command: build.sh, repos: ["https://github.com/xavierrouth/lc3-compiler"] , size: small}
     - { image: c2rust, name: c2rust, command: build.sh, args: master, repos: ["https://github.com/immunant/c2rust/tree/master"] , size: small}
