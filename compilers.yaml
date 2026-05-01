@@ -86,12 +86,14 @@ compilers:
     - { image: gcc-cross, name: bpf, args: "bpf trunk" }
     - { image: gcc-cross, name: powerpc64, args: "powerpc64 trunk" }
     - { image: gcc-cross, name: powerpc64le, args: "powerpc64le trunk" }
-      # see https://github.com/compiler-explorer/clang-builder/issues/28
-      #- { image: clang, name: clang_embed, args: embed-trunk }
     - { image: clang, name: llvm_spirv, args: llvm-spirv, repos: ["https://github.com/KhronosGroup/SPIRV-Tools/tree/main"] }
 
+    # see https://github.com/compiler-explorer/clang-builder/issues/28
+    #- { image: clang, name: clang_embed, args: embed-trunk }
     # see https://github.com/compiler-explorer/compiler-explorer/issues/6836
     # - { image: clang, name: dang, args: dang-main }
+    # corrects the previous two, has the same features
+    - { image: clang, name: thephd.dev, args: thephd.dev }
 
     - { image: clang, name: widberg, args: widberg-main, repos: ["https://github.com/widberg/llvm-project-widberg-extensions/tree/main"] }
     - { image: ispc, name: ispc, repos: ["https://github.com/ispc/ispc"] , size: small}
