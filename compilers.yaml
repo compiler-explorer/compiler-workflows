@@ -52,6 +52,7 @@ compilers:
     - { image: clang, name: clang_p3776, args: p3776-trunk, repos: ["https://github.com/term-est/llvm-project/tree/P3776-More-Trailing-Commas"] }
     - { image: clang, name: clang_p3822, args: p3822-trunk, repos: ["https://github.com/yuxuanchen1997/llvm-project/tree/users/yuxuanchen1997/p3822r0-requirements-noexcept"] }
     - { image: clang, name: clang_p3951, args: p3951-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/template-strings"] }
+    - { image: clang, name: clang_barry, args: barry-clang-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/compiler-explorer/barry"] }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh, repos: ["https://github.com/ricejasonf/parametric_expressions/tree/master"] }
     - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
     - { image: clang, name: clang_reflection, args: reflection-trunk, repos: ["https://github.com/matus-chochlik/llvm-project/tree/reflection"] }
