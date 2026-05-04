@@ -1,5 +1,5 @@
 ### DO NOT EDIT - created by a script ###
-name: thephd.dev via clang thephd.dev
+name: clang.thephd.dev via clang thephd.dev
 
 on:
   schedule:
@@ -17,7 +17,7 @@ jobs:
         uses: ./.github/actions/daily-build
         with:
           image: clang
-          name: thephd.dev
+          name: clang.thephd.dev
           command: build.sh
           args: thephd.dev
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
