@@ -83,7 +83,7 @@ jobs:
     runs-on: {runs_on}
     steps:
       - name: Start from a clean directory
-        uses: AutoModality/action-clean@v1.1.0
+        run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
       - uses: actions/checkout@v6
       - name: Run the build
         uses: ./.github/actions/daily-build
@@ -110,7 +110,7 @@ jobs:
     runs-on: {runs_on}
     steps:
       - name: Start from a clean directory
-        uses: AutoModality/action-clean@v1.1.0
+        run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
       - uses: actions/checkout@v6
       - name: Run the build
         uses: ./.github/actions/daily-build
