@@ -24,7 +24,7 @@ runs:
   using: "composite"
   steps:
     - name: Start from a clean directory
-      uses: AutoModality/action-clean@v1.1.1
+      uses: AutoModality/action-clean@v1.1.0
     - uses: actions/checkout@v6
     - name: Get previous build version number, and start the run
       shell: bash
