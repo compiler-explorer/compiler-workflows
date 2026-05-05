@@ -24,8 +24,9 @@ runs:
   using: "composite"
   steps:
     - name: Start from a clean directory
-      uses: AutoModality/action-clean@v1.1.0
-    - uses: actions/checkout@v4
+      shell: bash
+      run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
+    - uses: actions/checkout@v6
     - name: Get previous build version number, and start the run
       shell: bash
       id: previous
