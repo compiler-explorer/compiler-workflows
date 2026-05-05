@@ -83,8 +83,8 @@ jobs:
     runs-on: {runs_on}
     steps:
       - name: Start from a clean directory
-        uses: AutoModality/action-clean@v1.1.0
-      - uses: actions/checkout@v4
+        uses: AutoModality/action-clean@v1.1.1
+      - uses: actions/checkout@v6
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
@@ -110,8 +110,8 @@ jobs:
     runs-on: {runs_on}
     steps:
       - name: Start from a clean directory
-        uses: AutoModality/action-clean@v1.1.0
-      - uses: actions/checkout@v4
+        uses: AutoModality/action-clean@v1.1.1
+      - uses: actions/checkout@v6
       - name: Run the build
         uses: ./.github/actions/daily-build
         with:
