@@ -64,6 +64,7 @@ compilers:
     - { image: clang, name: mlir_trunk, args: mlir-trunk }
     - { image: go, name: go , size: small}
     - { image: ccc, name: ccc, command: build.sh, args: main, repos: ["https://github.com/anthropics/claudes-c-compiler/tree/main"] , size: small}
+    - { image: aburi, name: aburi, command: build.sh, args: atta-mills, repos: ["https://github.com/serjective/aburi/tree/atta-mills"], size: small }
     - { image: misc, name: tinycc, command: build-tinycc.sh , size: small}
     - { image: misc, name: cc65, command: buildcc65.sh, repos: ["https://github.com/cc65/cc65/tree/master"] , size: small}
     - { image: misc, name: mrustc, command: build-mrustc.sh, args: master, repos: ["https://github.com/thepowersgang/mrustc/tree/master"] , size: small}
