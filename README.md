@@ -37,23 +37,31 @@ Contact Matt directly by email, or on Discord to be added to the group.
    "Show more workflows..." a few times
 3. Choose your build (you can bookmark this page for ease of return later)
 4. Choose "Run workflow" at the top right of the pane with prior builds
-5. Choose the green "Run workflow"
-6. After a pause of a few seconds your build should appear at the top of the list
-7. It may take a few minutes to get scheduled, but you should then be able to
+5. If your build supports it, you'll see an "Install to Compiler Explorer after
+   a successful build" tickbox, on by default: leave it ticked and your compiler
+   will be installed on the live site as soon as the build succeeds — no further
+   steps needed. (No tickbox? Ask an admin to add an `install:` entry for your
+   compiler in `compilers.yaml`, or install by hand as below.)
+6. Choose the green "Run workflow"
+7. After a pause of a few seconds your build should appear at the top of the list
+8. It may take a few minutes to get scheduled, but you should then be able to
    watch it build. If it _builds quickly_ then check the output: we try not to
    build if we think there has been no changes. Check you pushed your compiler's
    changes if not, else contact the admins on Discord
-8. Ensure everything goes green
-9. Trigger an installation
+9. Ensure everything goes green. If you left the tickbox on, that includes the
+   "install" job, and your compiler is then live: you're done. (A build we
+   skipped as unchanged won't install.)
 
-### Triggering an installation
+### Triggering an installation by hand
+
+Builds with the install tickbox deploy themselves; this is for the rest, or
+for re-installing without waiting for a build.
 
 1. Head to https://github.com/compiler-explorer/compiler-workflows/actions/workflows/install-compilers.yml
 2. Click "Run workflow"
 3. Type in the build type and name, e.g. `clang hana-clang-trunk`
-4. If today's build has already deployed and you want to force, tick "Force install"
-5. Click "Run workflow"
-6. Check it completes OK _and_ that the end of the output of the "install" / "install compilers" step looks something like:
+4. Click "Run workflow"
+5. Check it completes OK _and_ that the end of the output of the "install" / "install compilers" step looks something like:
 
 ```
 2026-01-03 20:20:32,446 compilers/c++/nightly/clang hana-clang-trunk WARNING  Not running on admin node - not saving compiler version info to AWS
@@ -73,8 +81,7 @@ You can script these, if you download and setup the `gh` Github tool. Then you c
 ```
 gh workflow run -R compiler-explorer/compiler-workflows \
     'Install compiler(s)' \
-    -f compilers='clang hana-clang-trunk' \
-    -f force=true
+    -f compilers='clang hana-clang-trunk'
 ```
 
 Where you can change the `compilers=` line appropriately.

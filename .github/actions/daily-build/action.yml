@@ -20,6 +20,11 @@ inputs:
     description: "Secret key"
     required: true
 
+outputs:
+  status:
+    description: "Build status: OK, SKIPPED (source unchanged), or empty if the build failed"
+    value: ${{ steps.build.outputs.status }}
+
 runs:
   using: "composite"
   steps:
