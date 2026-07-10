@@ -44,9 +44,7 @@ make install-pre-commit # Install pre-commit hooks
    - { image: <docker-image>, name: <unique-name>, args: <args>, repos: ["https://github.com/owner/repo"] }
    # with specific branch:
    - { image: <docker-image>, name: <unique-name>, args: <args>, repos: ["https://github.com/owner/repo/tree/branch-name"] }
-   # with one-click deploy: manual dispatches get an "install" tickbox (default on) that
-   # installs the result onto Compiler Explorer once a fresh build succeeds. Scheduled
-   # builds never install this way (the admin node's nightly install handles those):
+   # with one-click deploy (manual dispatches get an "install after build" tickbox, default on):
    - { image: <docker-image>, name: <unique-name>, args: <args>, install: <ce_install pattern, e.g. clang hana-clang-trunk> }
    ```
 2. Run `make build-yamls` (or let pre-commit do it)

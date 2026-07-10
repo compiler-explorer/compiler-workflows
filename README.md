@@ -60,8 +60,11 @@ for re-installing without waiting for a build.
 1. Head to https://github.com/compiler-explorer/compiler-workflows/actions/workflows/install-compilers.yml
 2. Click "Run workflow"
 3. Type in the build type and name, e.g. `clang hana-clang-trunk`
-4. Click "Run workflow"
-5. Check it completes OK _and_ that the end of the output of the "install" / "install compilers" step looks something like:
+4. For a nightly compiler (like that example), tick "Enable nightly builds" —
+   beware that this changes what a broad pattern like `gcc` matches
+5. If it's already installed and you want to reinstall, tick "Force install"
+6. Click "Run workflow"
+7. Check it completes OK _and_ that the end of the output of the "install" / "install compilers" step looks something like:
 
 ```
 2026-01-03 20:20:32,446 compilers/c++/nightly/clang hana-clang-trunk WARNING  Not running on admin node - not saving compiler version info to AWS
@@ -81,7 +84,9 @@ You can script these, if you download and setup the `gh` Github tool. Then you c
 ```
 gh workflow run -R compiler-explorer/compiler-workflows \
     'Install compiler(s)' \
-    -f compilers='clang hana-clang-trunk'
+    -f compilers='clang hana-clang-trunk' \
+    -f enable_nightly=true \
+    -f force=true
 ```
 
 Where you can change the `compilers=` line appropriately.

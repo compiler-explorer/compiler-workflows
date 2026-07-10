@@ -1,24 +1,39 @@
 name: Install compiler(s)
 run-name: Install ${{ inputs.compilers }}
 
-# Installs nightly compilers onto Compiler Explorer, exactly as the admin's manual
-# `ce_install --enable nightly install --force ...` would. Callable from the generated
-# build-daily workflows (see the `install` field in compilers.yaml), or dispatched by
-# hand for ad-hoc installs.
-
 on:
   workflow_call:
     inputs:
       compilers:
-        description: 'ce_install pattern to install (e.g. "clang hana-clang-trunk")'
+        description: 'Compiler pattern to install (e.g., "clang hana-clang-trunk")'
         required: true
         type: string
+      enable_nightly:
+        description: 'Enable nightly builds'
+        required: false
+        type: boolean
+        default: false
+      force:
+        description: 'Force install even if would otherwise skip'
+        required: false
+        type: boolean
+        default: false
   workflow_dispatch:
     inputs:
       compilers:
-        description: 'ce_install pattern to install (e.g. "clang hana-clang-trunk")'
+        description: 'Compiler pattern to install (e.g., "clang hana-clang-trunk")'
         required: true
         type: string
+      enable_nightly:
+        description: 'Enable nightly builds'
+        required: false
+        type: boolean
+        default: false
+      force:
+        description: 'Force install even if would otherwise skip'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   install:
@@ -37,10 +52,18 @@ jobs:
 
       - name: Install ${{ inputs.compilers }}
         env:
-          # Via the environment (not template interpolation) so the pattern can't
-          # smuggle shell syntax into the run script.
+          # via env rather than interpolation so input can't inject shell syntax
           COMPILERS: ${{ inputs.compilers }}
-        # set -f: the pattern is ce_install filter words — word-split it, never glob it.
+          ENABLE_NIGHTLY: ${{ inputs.enable_nightly }}
+          FORCE: ${{ inputs.force }}
         run: |
-          set -f
-          sudo bin/ce_install --check-user nobody --enable nightly install --force $COMPILERS
+          set -f # word-split $COMPILERS, but never glob it
+          ENABLE_FLAG=""
+          if [[ "$ENABLE_NIGHTLY" == "true" ]]; then
+            ENABLE_FLAG="--enable nightly"
+          fi
+          FORCE_FLAG=""
+          if [[ "$FORCE" == "true" ]]; then
+            FORCE_FLAG="--force"
+          fi
+          sudo bin/ce_install --check-user nobody $ENABLE_FLAG install $FORCE_FLAG $COMPILERS

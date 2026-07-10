@@ -24,10 +24,8 @@ def make_yaml_doc(
     size: str = "large", install: str | None = None,
 ) -> str:
     runs_on = SIZE_TO_LABELS[size]
-    # Compilers with an `install` target (a ce_install pattern) get an on-by-default
-    # dispatch input and a follow-up job that installs the result, so compiler authors
-    # can build-and-deploy in one click. Scheduled runs never install from here: the
-    # nightly install on the admin node picks those up.
+    # If an install target is specified, manual dispatches get an on-by-default
+    # "install after build" input; scheduled builds are installed by the admin node
     workflow_dispatch_block = "workflow_dispatch:"
     build_outputs = ""
     build_id = ""
@@ -47,12 +45,12 @@ def make_yaml_doc(
         install_job = f"""
   install:
     needs: daily-build
-    # Only manual dispatches install from here, and only after a fresh, successful
-    # build; scheduled builds are installed by the admin node's nightly install.
     if: ${{{{ github.event_name == 'workflow_dispatch' && inputs.install && needs.daily-build.outputs.status == 'OK' }}}}
     uses: ./.github/workflows/install-compilers.yml
     with:
       compilers: {json.dumps(install)}
+      enable_nightly: true
+      force: true
 """
     # If repos are specified, add a check-activity job that runs first on a cheap runner
     if repos:

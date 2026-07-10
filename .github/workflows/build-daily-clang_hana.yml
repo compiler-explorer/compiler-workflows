@@ -89,9 +89,9 @@ jobs:
 
   install:
     needs: daily-build
-    # Only manual dispatches install from here, and only after a fresh, successful
-    # build; scheduled builds are installed by the admin node's nightly install.
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.install && needs.daily-build.outputs.status == 'OK' }}
     uses: ./.github/workflows/install-compilers.yml
     with:
       compilers: "clang hana-clang-trunk"
+      enable_nightly: true
+      force: true
