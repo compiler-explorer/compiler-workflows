@@ -2,6 +2,22 @@ name: Install compiler(s)
 run-name: Install ${{ inputs.compilers }}
 
 on:
+  workflow_call:
+    inputs:
+      compilers:
+        description: 'Compiler pattern to install (e.g., "clang hana-clang-trunk")'
+        required: true
+        type: string
+      enable_nightly:
+        description: 'Enable nightly builds'
+        required: false
+        type: boolean
+        default: false
+      force:
+        description: 'Force install even if would otherwise skip'
+        required: false
+        type: boolean
+        default: false
   workflow_dispatch:
     inputs:
       compilers:
@@ -12,7 +28,7 @@ on:
         description: 'Enable nightly builds'
         required: false
         type: boolean
-        default: true
+        default: false
       force:
         description: 'Force install even if would otherwise skip'
         required: false
@@ -30,21 +46,24 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: compiler-explorer/infra
-          path: infra
 
       - name: Set up environment
-        working-directory: infra
         run: make ce
 
-      - name: Install compilers
-        working-directory: infra
+      - name: Install ${{ inputs.compilers }}
+        env:
+          # via env rather than interpolation so input can't inject shell syntax
+          COMPILERS: ${{ inputs.compilers }}
+          ENABLE_NIGHTLY: ${{ inputs.enable_nightly }}
+          FORCE: ${{ inputs.force }}
         run: |
+          set -f # word-split $COMPILERS, but never glob it
           ENABLE_FLAG=""
-          if [[ "${{ inputs.enable_nightly }}" == "true" ]]; then
+          if [[ "$ENABLE_NIGHTLY" == "true" ]]; then
             ENABLE_FLAG="--enable nightly"
           fi
           FORCE_FLAG=""
-          if [[ "${{ inputs.force }}" == "true" ]]; then
+          if [[ "$FORCE" == "true" ]]; then
             FORCE_FLAG="--force"
           fi
-          sudo bin/ce_install --check-user nobody $ENABLE_FLAG install $FORCE_FLAG ${{ inputs.compilers }}
+          sudo bin/ce_install --check-user nobody $ENABLE_FLAG install $FORCE_FLAG $COMPILERS

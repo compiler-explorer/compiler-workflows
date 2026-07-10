@@ -30,6 +30,7 @@ make install-pre-commit # Install pre-commit hooks
 
 - `.github/actions/daily-build/action.yml` - Reusable composite action for all builds
 - `.github/workflows/build-daily-*.yml` - Auto-generated (DO NOT EDIT directly)
+- `.github/workflows/install-compilers.yml` - Reusable workflow installing compilers via `ce_install`; called by install-enabled build workflows, or dispatched by hand
 - `.github/workflows/ci.yml` - CI for this repo itself
 
 ### Adding a New Compiler
@@ -43,6 +44,8 @@ make install-pre-commit # Install pre-commit hooks
    - { image: <docker-image>, name: <unique-name>, args: <args>, repos: ["https://github.com/owner/repo"] }
    # with specific branch:
    - { image: <docker-image>, name: <unique-name>, args: <args>, repos: ["https://github.com/owner/repo/tree/branch-name"] }
+   # with one-click deploy (manual dispatches get an "install after build" tickbox, default on):
+   - { image: <docker-image>, name: <unique-name>, args: <args>, install: <ce_install pattern, e.g. clang hana-clang-trunk> }
    ```
 2. Run `make build-yamls` (or let pre-commit do it)
 3. Also add entry in `remove_old_compilers.sh` in the infra repository

@@ -46,7 +46,7 @@ compilers:
     - { image: clang, name: clang_p3039, args: p3039-trunk, repos: ["https://github.com/Imagix/llvm-project-p3039/tree/p3039experimental"] }
     - { image: clang, name: clang_p3309, args: p3309-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3309-constexpr-atomic-and-atomic-ref"] }
     - { image: clang, name: clang_p3367, args: p3367-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3367-constexpr-coroutines"] }
-    - { image: clang, name: clang_hana, args: hana-clang-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/compiler-explorer/hana-clang"] }
+    - { image: clang, name: clang_hana, args: hana-clang-trunk, install: clang hana-clang-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/compiler-explorer/hana-clang"] }
     - { image: clang, name: clang_p3334, args: p3334-trunk, repos: ["https://github.com/tal-yac/llvm-project/tree/p3334-cross-static"] }
     - { image: clang, name: clang_p3372, args: p3372-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/P3372-constexpr-containers-and-adaptors"] }
     - { image: clang, name: clang_p3385, args: p3385-trunk, repos: ["https://github.com/zebullax/clang-p2996/tree/3385R5"] }
@@ -54,13 +54,12 @@ compilers:
     - { image: clang, name: clang_p3776, args: p3776-trunk, repos: ["https://github.com/term-est/llvm-project/tree/P3776-More-Trailing-Commas"] }
     - { image: clang, name: clang_p3822, args: p3822-trunk, repos: ["https://github.com/yuxuanchen1997/llvm-project/tree/users/yuxuanchen1997/p3822r0-requirements-noexcept"] }
     - { image: clang, name: clang_p3951, args: p3951-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/template-strings"] }
-    - { image: clang, name: clang_barry, args: barry-clang-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/compiler-explorer/barry"] }
+    - { image: clang, name: clang_barry, args: barry-clang-trunk, install: clang barry-clang-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/compiler-explorer/barry"] }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh, repos: ["https://github.com/ricejasonf/parametric_expressions/tree/master"] }
     - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
     - { image: clang, name: clang_reflection, args: reflection-trunk, repos: ["https://github.com/matus-chochlik/llvm-project/tree/reflection"] }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk, repos: ["https://github.com/Quuxplusone/llvm-project/tree/trivially-relocatable"] }
     - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk, repos: ["https://github.com/dancrn/llvm-project/tree/cxx-variadic-friends"] }
-    - { image: clang, name: clang_hana, args: hana-clang-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/compiler-explorer/hana-clang"] }
     - { image: clang, name: clang_swiftlang, args: swiftlang-trunk, repos: ["https://github.com/swiftlang/llvm-project/tree/next"] }
     - { image: dotnet, name: dotnet, command: build.sh, args: trunk, repos: ["https://github.com/dotnet/runtime"] , size: medium}
     - { image: clang, name: mlir_trunk, args: mlir-trunk }

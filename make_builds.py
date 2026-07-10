@@ -21,9 +21,37 @@ SIZE_TO_LABELS = {
 
 def make_yaml_doc(
     friendly_name: str, image: str, name: str, command: str, args: str, repos: list[str],
-    size: str = "large",
+    size: str = "large", install: str | None = None,
 ) -> str:
     runs_on = SIZE_TO_LABELS[size]
+    # If an install target is specified, manual dispatches get an on-by-default
+    # "install after build" input; scheduled builds are installed by the admin node
+    workflow_dispatch_block = "workflow_dispatch:"
+    build_outputs = ""
+    build_id = ""
+    install_job = ""
+    if install:
+        workflow_dispatch_block = """workflow_dispatch:
+    inputs:
+      install:
+        description: 'Install to Compiler Explorer after a successful build'
+        type: boolean
+        default: true"""
+        build_outputs = """
+    outputs:
+      status: ${{ steps.build.outputs.status }}"""
+        build_id = """
+        id: build"""
+        install_job = f"""
+  install:
+    needs: daily-build
+    if: ${{{{ github.event_name == 'workflow_dispatch' && inputs.install && needs.daily-build.outputs.status == 'OK' }}}}
+    uses: ./.github/workflows/install-compilers.yml
+    with:
+      compilers: {json.dumps(install)}
+      enable_nightly: true
+      force: true
+"""
     # If repos are specified, add a check-activity job that runs first on a cheap runner
     if repos:
         repos_json = json.dumps(repos)
@@ -33,7 +61,7 @@ name: {friendly_name}
 on:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
+  {workflow_dispatch_block}
 
 jobs:
   check-activity:
@@ -93,12 +121,12 @@ jobs:
   daily-build:
     needs: check-activity
     if: ${{{{ needs.check-activity.outputs.should_build == 'true' }}}}
-    runs-on: {runs_on}
+    runs-on: {runs_on}{build_outputs}
     steps:
       - name: Start from a clean directory
         run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
       - uses: actions/checkout@v6
-      - name: Run the build
+      - name: Run the build{build_id}
         uses: ./.github/actions/daily-build
         with:
           image: {image}
@@ -107,7 +135,7 @@ jobs:
           args: {args}
           AWS_ACCESS_KEY_ID: ${{{{ secrets.AWS_ACCESS_KEY_ID }}}}
           AWS_SECRET_ACCESS_KEY: ${{{{ secrets.AWS_SECRET_ACCESS_KEY }}}}
-"""
+{install_job}"""
     else:
         # No repos specified - simple workflow without activity check
         return f"""### DO NOT EDIT - created by a script ###
@@ -116,16 +144,16 @@ name: {friendly_name}
 on:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
+  {workflow_dispatch_block}
 
 jobs:
   daily-build:
-    runs-on: {runs_on}
+    runs-on: {runs_on}{build_outputs}
     steps:
       - name: Start from a clean directory
         run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
       - uses: actions/checkout@v6
-      - name: Run the build
+      - name: Run the build{build_id}
         uses: ./.github/actions/daily-build
         with:
           image: {image}
@@ -134,7 +162,7 @@ jobs:
           args: {args}
           AWS_ACCESS_KEY_ID: ${{{{ secrets.AWS_ACCESS_KEY_ID }}}}
           AWS_SECRET_ACCESS_KEY: ${{{{ secrets.AWS_SECRET_ACCESS_KEY }}}}
-"""
+{install_job}"""
 
 
 def make_shield_url(friendly_name: str, build_name: str, colour:str, query: str) -> str:
@@ -175,6 +203,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
         args = daily_compiler.get("args", "trunk")
         repos = daily_compiler.get("repos", [])
         size = daily_compiler.get("size", "large")
+        install = daily_compiler.get("install")
         build_yml = f"build-daily-{name}.yml"
         friendly_name = f"{name} via {image} {args}"
         (output_path / build_yml).write_text(
@@ -186,6 +215,7 @@ def main(yaml_file: TextIO, status_file: TextIO, output_dir: str):
                 args=args,
                 repos=repos,
                 size=size,
+                install=install,
             )
         )
         badges[friendly_name] = make_status_badges(friendly_name, name, build_yml)
