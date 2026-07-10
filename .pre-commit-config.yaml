@@ -10,6 +10,10 @@ repos:
       rev: 2.1.5
       hooks:
         - id: shellcheck
+    - repo: https://github.com/rhysd/actionlint
+      rev: v1.7.12
+      hooks:
+        - id: actionlint
     - repo: local
       hooks:
         - id: builds-up-to-date
