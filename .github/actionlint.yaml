@@ -1,0 +1,6 @@
+self-hosted-runner:
+  # Labels of our self-hosted CE runners (see the ce-ci repository)
+  labels:
+    - ce
+    - small
+    - medium

@@ -66,4 +66,5 @@ jobs:
           if [[ "$FORCE" == "true" ]]; then
             FORCE_FLAG="--force"
           fi
+          # shellcheck disable=SC2086 # word-splitting the flag and filter word lists is the point
           sudo bin/ce_install --check-user nobody $ENABLE_FLAG install $FORCE_FLAG $COMPILERS
