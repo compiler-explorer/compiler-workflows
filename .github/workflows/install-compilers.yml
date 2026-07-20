@@ -43,7 +43,7 @@ jobs:
         run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
 
       - name: Checkout infra repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: compiler-explorer/infra
 
