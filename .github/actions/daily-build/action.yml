@@ -31,7 +31,7 @@ runs:
     - name: Start from a clean directory
       shell: bash
       run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: Get previous build version number, and start the run
       shell: bash
       id: previous

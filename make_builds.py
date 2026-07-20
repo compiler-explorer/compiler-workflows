@@ -125,7 +125,7 @@ jobs:
     steps:
       - name: Start from a clean directory
         run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Run the build{build_id}
         uses: ./.github/actions/daily-build
         with:
@@ -152,7 +152,7 @@ jobs:
     steps:
       - name: Start from a clean directory
         run: sudo find "$GITHUB_WORKSPACE" -mindepth 1 -delete
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Run the build{build_id}
         uses: ./.github/actions/daily-build
         with:
