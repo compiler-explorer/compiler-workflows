@@ -13,6 +13,7 @@ compilers:
     - { image: gcc, name: gcc_contracts_base, args: contracts-base-trunk, repos: ["https://github.com/iains/gcc-git/tree/C++26-contracts-base"] }
     - { image: gcc, name: gcc_contracts_gnu, args: contracts-GNUext-trunk, repos: ["https://github.com/iains/gcc-git/tree/C++26-contracts-GNU-extensions"] }
     - { image: gcc, name: gcc_lambda_p2034, args: contracts-lambda-p2034-trunk, repos: ["https://github.com/villevoutilainen/gcc/tree/lambda-p2034"] }
+    - { image: gcc, name: gcc_contracts_p4324, args: contracts-p4324-trunk, repos: ["https://github.com/villevoutilainen/gcc/tree/p4324"] }
     - { image: gcc, name: gcc_coroutines, args: cxx-coroutines-trunk, repos: ["https://github.com/iains/gcc-cxx-coroutines/tree/c++-coroutines"] }
     - { image: gcc, name: gcc_trivial_relocation, args: trivial-relocation-trunk, repos: ["https://github.com/iains/gcc-git/tree/C++2z-trivial-relocation"] }
     - { image: gcc, name: gcc_gccrs_master, args: gccrs-master, repos: ["https://github.com/Rust-GCC/gccrs/tree/master"] }
