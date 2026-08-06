@@ -21,6 +21,7 @@ compilers:
     - { image: gcc, name: gcc_p1144, args: p1144-trunk, repos: ["https://github.com/Quuxplusone/gcc/tree/trivially-relocatable"] }
     - { image: gcc, name: gcc_notadragon_contracts_p3850, args: notadragon-contracts-p3850, repos: ["https://github.com/notadragon/gnu_gcc/tree/contracts-p3850"] }
     - { image: gcc, name: gcc_thomas_healy, args: thomas-healy-trunk, repos: ["https://github.com/healytpk/gcc-thomas-healy/tree/trunk"] }
+    - { image: gcc, name: gcc_ilazaric_enclosing_cast, args: ilazaric-enclosing_cast, repos: ["https://github.com/ilazaric/gcc/tree/enclosing_cast"] }
     - { image: clang, name: clang }
     - { image: clang, name: clang_amdgpu, args: rocm-trunk, repos: ["https://github.com/ROCm/llvm-project/tree/amd-staging"] }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
