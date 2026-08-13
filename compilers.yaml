@@ -60,6 +60,8 @@ compilers:
     - { image: clang, name: clang_barry, args: barry-clang-trunk, install: clang barry-clang-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/compiler-explorer/barry"] }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh, repos: ["https://github.com/ricejasonf/parametric_expressions/tree/master"] }
     - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
+    - { image: clang, name: clang_profiles_core_ub, args: profiles-core-ub-trunk, install: clang profiles-core-ub-trunk, repos: ["https://github.com/cppalliance/clang/tree/profiles-core-ub"] }
+    - { image: clang, name: clang_profiles_init, args: profiles-init-trunk, install: clang profiles-init-trunk, repos: ["https://github.com/cppalliance/clang/tree/profiles-init"] }
     - { image: clang, name: clang_reflection, args: reflection-trunk, repos: ["https://github.com/matus-chochlik/llvm-project/tree/reflection"] }
     - { image: clang, name: clang_relocatable, args: relocatable-trunk, repos: ["https://github.com/Quuxplusone/llvm-project/tree/trivially-relocatable"] }
     - { image: clang, name: clang_variadic_friends, args: variadic-friends-trunk, repos: ["https://github.com/dancrn/llvm-project/tree/cxx-variadic-friends"] }
