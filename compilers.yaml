@@ -114,7 +114,6 @@ compilers:
     - { image: vast, name: vast, repos: ["https://github.com/trailofbits/vast/tree/master"] , size: small}
     - { image: mads, name: madpascal, args: trunk, repos: ["https://github.com/tebe6502/Mad-Assembler/tree/master", "https://github.com/tebe6502/Mad-Pascal/tree/master"] , size: small}
     - { image: clang, name: circt_trunk, command: build-circt.sh, args: trunk, repos: ["https://github.com/llvm/circt/tree/main"] }
-    - { image: clad, name: clad, args: trunk, repos: ["https://github.com/vgvassilev/clad/tree/master"] , size: small}
     - { image: clad, name: clad-trunk-clang-21.1.0, args: trunk-clang-21.1.0, repos: ["https://github.com/vgvassilev/clad/tree/master"] , size: small}
     - { image: miri, name: miri, command: build.sh, args: nightly , size: medium}
     - { image: micropython, name: micropython, command: build.sh, args: preview, repos: ["https://github.com/micropython/micropython"] , size: small}
