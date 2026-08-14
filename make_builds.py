@@ -13,7 +13,7 @@ import urllib.parse
 STALE_DAYS = 7
 
 SIZE_TO_LABELS = {
-    "large": "[ 'self-hosted', 'ce', 'linux', 'x64' ]",
+    "large": "[ 'self-hosted', 'ce', 'linux', 'x64', 'large' ]",
     "medium": "[ 'self-hosted', 'ce', 'linux', 'x64', 'medium' ]",
     "small": "[ 'self-hosted', 'ce', 'linux', 'x64', 'small' ]",
 }
