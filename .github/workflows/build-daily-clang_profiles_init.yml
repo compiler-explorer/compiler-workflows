@@ -69,7 +69,7 @@ jobs:
   daily-build:
     needs: check-activity
     if: ${{ needs.check-activity.outputs.should_build == 'true' }}
-    runs-on: [ 'self-hosted', 'ce', 'linux', 'x64' ]
+    runs-on: [ 'self-hosted', 'ce', 'linux', 'x64', 'large' ]
     outputs:
       status: ${{ steps.build.outputs.status }}
     steps:

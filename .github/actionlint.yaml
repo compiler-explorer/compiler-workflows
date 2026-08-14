@@ -4,3 +4,4 @@ self-hosted-runner:
     - ce
     - small
     - medium
+    - large
