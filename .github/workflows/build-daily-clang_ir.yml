@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          REPOS='["https://github.com/llvm/clangir/tree/main"]'
+          REPOS='["https://github.com/llvm/llvm-project/tree/main"]'
           STALE_DAYS=7
 
           SINCE_DATE=$(date -d "${STALE_DAYS} days ago" --iso-8601=seconds)
