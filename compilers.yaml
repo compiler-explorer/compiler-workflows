@@ -37,7 +37,7 @@ compilers:
     - { image: clang, name: clang_ericwf_contracts, args: ericwf-contracts-trunk, repos: ["https://github.com/efcs/llvm-project/tree/contracts-nightly"] }
     - { image: clang, name: clang_notadragon_contracts_p3850, args: notadragon-contracts-p3850, repos: ["https://github.com/notadragon/llvm-project/tree/contracts-p3850"] }
     - { image: clang, name: clang_implicit_constexpr, args: implicit-constexpr-trunk, repos: ["https://github.com/hanickadot/llvm-project/tree/feature/implicit-constexpr-flag"] }
-    - { image: clang, name: clang_ir, args: clangir-trunk, repos: ["https://github.com/llvm/clangir/tree/main"] }
+    - { image: clang, name: clang_ir, args: clangir-trunk }
     - { image: clang, name: clang_lifetime, args: lifetime-trunk, repos: ["https://github.com/mgehre/llvm-project/tree/lifetime"] }
     - { image: clang, name: clang_llvmflang, args: llvmflang-trunk }
     - { image: clang, name: clang_mizvekov_resugar, args: mizvekov-resugar, repos: ["https://github.com/mizvekov/llvm-project/tree/resugar"] }
