@@ -48,7 +48,7 @@ make install-pre-commit # Install pre-commit hooks
    - { image: <docker-image>, name: <unique-name>, args: <args>, install: <ce_install pattern, e.g. clang hana-clang-trunk> }
    ```
 2. Run `make build-yamls` (or let pre-commit do it)
-3. Also add entry in `remove_old_compilers.sh` in the infra repository
+3. Add the matching `type: nightly` installable in the infra repository's YAML; old dated builds are then pruned automatically by `ce_install prune-nightlies` (see infra's `docs/nightly_pruning.md`)
 
 ### Repo Activity Checking
 

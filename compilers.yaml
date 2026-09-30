@@ -1,8 +1,8 @@
 ---
 compilers:
   daily:
-    # IMPORTANT: when you add a build here you must also add an entry in remove_old_compilers.sh
-    # in the infra repository.
+    # IMPORTANT: when you add a build here you must also add its nightly installable in the
+    # infra repository's YAML; that is also what lets prune-nightlies clean up old builds.
     # These are slowly replacing the ones in admin-daily-builds.sh
     - { image: clang, name: llvm, args: llvm-trunk }
     - { image: gcc, name: gcc }
