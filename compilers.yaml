@@ -22,6 +22,7 @@ compilers:
     - { image: gcc, name: gcc_thomas_healy, args: thomas-healy-trunk, repos: ["https://github.com/healytpk/gcc-thomas-healy/tree/trunk"] }
     - { image: gcc, name: gcc_ilazaric_enclosing_cast, args: ilazaric-enclosing_cast, repos: ["https://github.com/ilazaric/gcc/tree/enclosing_cast"] }
     - { image: gcc, name: gcc_expr_reflect, args: expr-reflect-trunk, repos: ["https://github.com/yesmanchyk/gcc-mirror/tree/autograd-capable"] }
+    - { image: gcc, name: gcc_p0917, args: p0917-trunk, repos: ["https://github.com/mattkretz/gcc/tree/P0917_overloadable_conditional_operator"] }
     - { image: clang, name: clang }
     - { image: clang, name: clang_amdgpu, args: rocm-trunk, repos: ["https://github.com/ROCm/llvm-project/tree/amd-staging"] }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
