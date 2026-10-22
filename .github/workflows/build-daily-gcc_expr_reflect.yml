@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          REPOS='["https://github.com/yesmanchyk/gcc-mirror/tree/autograd-capable"]'
+          REPOS='["https://github.com/CppReflectionAD/gcc/tree/p4395"]'
           STALE_DAYS=7
 
           SINCE_DATE=$(date -d "${STALE_DAYS} days ago" --iso-8601=seconds)
