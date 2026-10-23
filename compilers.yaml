@@ -28,7 +28,7 @@ compilers:
     - { image: clang, name: clang_assertions, args: assertions-trunk }
     - { image: clang, name: clang_autonsdmi, args: autonsdmi-trunk, repos: ["https://github.com/cor3ntin/llvm-project/tree/experiments"] }
     - { image: clang, name: clang_bb_p2996, args: bb-p2996-trunk, repos: ["https://github.com/bloomberg/clang-p2996/tree/p2996"] }
-    - { image: clang, name: clang_expr_reflect, args: expr-reflect-trunk, repos: ["https://github.com/siqiyyyy/clang-p2996/tree/expr-reflect"] }
+    - { image: clang, name: clang_expr_reflect, args: expr-reflect-trunk, repos: ["https://github.com/CppReflectionAD/clang-p4395/tree/p4395"] }
     - { image: clang, name: clang_chrisbazley, args: chrisbazley-trunk, repos: ["https://github.com/chrisbazley/llvm-project/tree/main"] }
     - { image: clang, name: clang_cppx, args: cppx-trunk, repos: ["https://github.com/lock3/meta/tree/compiler-explorer"] }
     - { image: clang, name: clang_cppx_ext, args: cppx-ext-trunk, repos: ["https://github.com/lock3/cppx/tree/cppx"] }
