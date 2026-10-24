@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          REPOS='["https://github.com/siqiyyyy/clang-p2996/tree/expr-reflect"]'
+          REPOS='["https://github.com/CppReflectionAD/clang-p4395/tree/p4395"]'
           STALE_DAYS=7
 
           SINCE_DATE=$(date -d "${STALE_DAYS} days ago" --iso-8601=seconds)
