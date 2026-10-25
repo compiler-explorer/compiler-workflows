@@ -23,6 +23,7 @@ compilers:
     - { image: gcc, name: gcc_ilazaric_enclosing_cast, args: ilazaric-enclosing_cast, repos: ["https://github.com/ilazaric/gcc/tree/enclosing_cast"] }
     - { image: gcc, name: gcc_expr_reflect, args: expr-reflect-trunk, repos: ["https://github.com/CppReflectionAD/gcc/tree/p4395"] }
     - { image: gcc, name: gcc_p0917, args: p0917-trunk, repos: ["https://github.com/mattkretz/gcc/tree/P0917_overloadable_conditional_operator"] }
+    - { image: gcc, name: gcc_p4307_p4345, args: p4307-p4345-trunk, repos: ["https://github.com/steve-downey/gcc/tree/backticks-and-uniops"] }
     - { image: clang, name: clang }
     - { image: clang, name: clang_amdgpu, args: rocm-trunk, repos: ["https://github.com/ROCm/llvm-project/tree/amd-staging"] }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
@@ -59,6 +60,7 @@ compilers:
     - { image: clang, name: clang_p3817, args: p3817-trunk, repos: ["https://github.com/regevran/llvm-project-fork/tree/p3817"] }
     - { image: clang, name: clang_p3822, args: p3822-trunk, repos: ["https://github.com/yuxuanchen1997/llvm-project/tree/users/yuxuanchen1997/p3822r0-requirements-noexcept"] }
     - { image: clang, name: clang_p3951, args: p3951-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/template-strings"] }
+    - { image: clang, name: clang_p4307_p4345, args: p4307-p4345-trunk, repos: ["https://github.com/steve-downey/llvm-project/tree/backticks-and-uniops"] }
     - { image: clang, name: clang_barry, args: barry-clang-trunk, install: clang barry-clang-trunk, repos: ["https://github.com/brevzin/llvm-project/tree/compiler-explorer/barry"] }
     - { image: clang, name: clang_parmexpr, command: build-parmexpr.sh, repos: ["https://github.com/ricejasonf/parametric_expressions/tree/master"] }
     - { image: clang, name: clang_patmat, args: patmat-trunk, repos: ["https://github.com/mpark/llvm-project/tree/p2688-pattern-matching"] }
