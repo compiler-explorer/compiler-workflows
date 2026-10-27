@@ -24,6 +24,7 @@ compilers:
     - { image: gcc, name: gcc_expr_reflect, args: expr-reflect-trunk, repos: ["https://github.com/CppReflectionAD/gcc/tree/p4395"] }
     - { image: gcc, name: gcc_p0917, args: p0917-trunk, repos: ["https://github.com/mattkretz/gcc/tree/P0917_overloadable_conditional_operator"] }
     - { image: gcc, name: gcc_p4307_p4345, args: p4307-p4345-trunk, repos: ["https://github.com/steve-downey/gcc/tree/backticks-and-uniops"] }
+    - { image: gcc, name: gcc_dascandy_subsets, args: dascandy-subsets-trunk, repos: ["https://github.com/dascandy/gcc/tree/subsets-restructured"] }
     - { image: clang, name: clang }
     - { image: clang, name: clang_amdgpu, args: rocm-trunk, repos: ["https://github.com/ROCm/llvm-project/tree/amd-staging"] }
     - { image: clang, name: clang_assertions, args: assertions-trunk }
