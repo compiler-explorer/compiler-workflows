@@ -87,7 +87,6 @@ compilers:
     - { image: lc3, name: lc3, command: build.sh, repos: ["https://github.com/xavierrouth/lc3-compiler"] , size: small}
     - { image: c2rust, name: c2rust, command: build.sh, args: master, repos: ["https://github.com/immunant/c2rust/tree/master"] , size: small}
     - { image: misc, name: clspv, command: build-clspv.sh, args: main, repos: ["https://github.com/google/clspv/tree/main"] , size: small}
-    - { image: jakt, name: jakt, command: build.sh, args: trunk, repos: ["https://github.com/SerenityOS/jakt/tree/main"] , size: small}
     - { image: misc, name: cppfront, command: build-cppfront.sh, args: trunk, repos: ["https://github.com/hsutter/cppfront/tree/main"] , size: small}
     - { image: misc, name: dxc, command: build-dxc.sh, args: trunk, repos: ["https://github.com/microsoft/DirectXShaderCompiler/tree/main"] , size: small}
     - { image: misc, name: pahole, command: build-pahole.sh, args: trunk , size: small}
